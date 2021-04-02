@@ -15,31 +15,23 @@ import LayoutDefault from "./layouts/LayoutDefault";
 import Home from "./views/Home";
 
 function App() {
-    const childRef = useRef();
     let location = useLocation();
     useEffect(() => {
-        const page = location.pathname;
         document.body.classList.add("is-loaded");
-        childRef.current.init();
     }, [location]);
     return (
         <>
-            <ScrollReveal
-                ref={childRef}
-                children={() => (
-                    <Switch>
-                        <AppRoute
-                            exact
-                            path="/"
-                            component={Home}
-                            layout={LayoutDefault}
-                        />
+            <Router>
+                <AppRoute
+                    exact
+                    path="/"
+                    component={Home}
+                    layout={LayoutDefault}
+                />
 
-                        <AppRoute path="/register" component={Register} />
-                        <AppRoute path="/login" component={Login} />
-                    </Switch>
-                )}
-            />
+                <Route path="/register" component={Register} />
+                <Route path="/login" component={Login} />
+            </Router>
         </>
     );
 }

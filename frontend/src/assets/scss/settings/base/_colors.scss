@@ -55,7 +55,7 @@ $icon--color: (hamburger: get-color(light, 2), // hamburger icon
 );
 
 // Misc elements: background color
-$bg--color: (body: get-color(dark, 1),
+$bg--color: (body: get-color(primary, 2),
 	body-shadow: 0 20px 48px rgba(get-color(dark, 1), .8), // body shadow when a boxed layout is used (set to null if don't want a shadow)
 	body-outer: lighten(get-color(dark, 1), 2%), // outer bg color when a boxed layout is used
 	bg-color: lighten(get-color(light, 1), 9%), // .has-bg-color helper class
