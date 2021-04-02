@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from "react";
 import { useLocation, Switch } from "react-router-dom";
 import AppRoute from "./utils/AppRoute";
 import ScrollReveal from "./utils/ScrollReveal";
-import "./App.css";
+import "./index.css";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Navbar1 from "./components/Navbar1";

@@ -1,14 +1,10 @@
 /*--------------------------------------------------------------
-# Based on Cruip framework - v1.0.0
---------------------------------------------------------------*/
-
-/*--------------------------------------------------------------
 # Variables, functions and mixins
 --------------------------------------------------------------*/
 @import "core/abstracts/functions",
-		"settings/settings",
-        "core/abstracts/mixins",
-        'core/abstracts/include-media';
+"settings/settings",
+"core/abstracts/mixins",
+'core/abstracts/include-media';
 
 /*--------------------------------------------------------------
 # Normalize

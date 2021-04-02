@@ -114,13 +114,7 @@ const Header = ({
                                             navPosition &&
                                                 `header-nav-${navPosition}`
                                         )}
-                                    >
-                                        <li>
-                                            <Link to="#0" onClick={closeMenu}>
-                                                Documentation
-                                            </Link>
-                                        </li>
-                                    </ul>
+                                    ></ul>
                                     {!hideSignin && (
                                         <ul className="list-reset header-nav-right">
                                             <li>
