@@ -4,10 +4,15 @@ import Image from "react-bootstrap/Image";
 import logo from "../logo.png";
 const Navbar1 = () => {
     return (
-        <Navbar variant="dark" expand="lg">
+        <Navbar variant="dark" expand="lg" className="my-0 py-0">
             <Navbar.Brand href="/">
-                <Image style={{ width: 60, height: 60 }} src={logo} />
-                Hamster Health
+                <Image style={{ width: 50, height: 50 }} src={logo} />
+                <span
+                    className="px-2 h-100 my-2"
+                    style={{ color: "#ff8600ff", fontSize: 24 }}
+                >
+                    Hamster Health
+                </span>
             </Navbar.Brand>
 
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
