@@ -5,8 +5,10 @@ import logo from "../logo.png";
 const Navbar1 = () => {
     return (
         <Navbar variant="dark" expand="lg">
-            <Image style={{ width: 60, height: 60 }} src={logo} />
-            <Navbar.Brand href="/">Hamster Health</Navbar.Brand>
+            <Navbar.Brand href="/">
+                <Image style={{ width: 60, height: 60 }} src={logo} />
+                Hamster Health
+            </Navbar.Brand>
 
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
