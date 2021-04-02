@@ -60,7 +60,9 @@ const Hero = ({
                             className="mt-0 mb-16 reveal-from-bottom"
                             data-reveal-delay="200"
                         >
-                            <span className="text-color-primary">Hamster</span>{" "}
+                            <span className="text-color-secondary">
+                                Hamster
+                            </span>{" "}
                             Health
                         </h1>
                         <div className="container-xs">
@@ -68,8 +70,8 @@ const Hero = ({
                                 className="m-0 mb-32 reveal-from-bottom"
                                 data-reveal-delay="400"
                             >
-                                Quarantine task organiser focused on self
-                                improvement
+                                Task organiser focused on self improvement
+                                during quarantine
                             </p>
                             <div
                                 className="reveal-from-bottom"
