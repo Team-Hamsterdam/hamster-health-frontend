@@ -37,7 +37,10 @@ function App() {
                     path="/register"
                     render={(props) => <Register {...props} api={api} />}
                 />
-                <Route path="/login" component={Login} />
+                <Route
+                    path="/login"
+                    render={(props) => <Login {...props} api={api} />}
+                />
             </Router>
         </React.Fragment>
     );

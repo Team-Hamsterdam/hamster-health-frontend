@@ -48,13 +48,18 @@ const Register = ({ api }) => {
             name: name,
         };
         console.log(api);
-        const token = await fetch(`${api}/auth/register`, {
+        const res = await fetch(`${api}/auth/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body),
         });
 
-        window.sessionStorage.setItem("token", token);
+        if (!res.ok) {
+            const message = `An error has occured: ${res.status}`;
+            throw new Error(message);
+        } else {
+            this.props.history.push("/login");
+        }
     };
     return (
         <>
@@ -69,7 +74,7 @@ const Register = ({ api }) => {
                 <Row className="center">
                     <Row
                         className="w-100 rounded"
-                        style={{ backgroundColor: "#758bfd" }}
+                        style={{ backgroundColor: "#758bfd", minHeight: 600 }}
                     >
                         <Col
                             md={6}
