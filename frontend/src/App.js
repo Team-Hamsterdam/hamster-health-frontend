@@ -1,12 +1,10 @@
-import React, { useRef, useEffect } from "react";
-import { useLocation, Switch } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import AppRoute from "./utils/AppRoute";
-import ScrollReveal from "./utils/ScrollReveal";
 import "./index.css";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Tasks from "./components/Tasks";
-import Header from "./components/layout/Header";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 

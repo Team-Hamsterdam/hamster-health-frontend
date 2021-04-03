@@ -1,14 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import Nav from "react-bootstrap/Nav";
 import Image from "react-bootstrap/Image";
 import logo from "../logo.png";
 import Row from "react-bootstrap/Row";
-import { Link, NavLink, useHistory } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Navbar1 = () => {
-    const history = useHistory();
     return (
         <Navbar collapseOnSelect expand="lg" bg="#27187eff" variant="dark">
             <Navbar.Brand
@@ -26,7 +24,7 @@ const Navbar1 = () => {
                         src={logo}
                         className="d-inline-block align-top"
                     />{" "}
-                    <span class="text-color-secondary">Hamster</span> Health
+                    <span className="text-color-secondary">Hamster</span> Health
                 </Row>
             </Navbar.Brand>
 
