@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
+html,
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Poppins', 'Segoe UI', 'Roboto', 'Oxygen',
@@ -8,11 +9,16 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: white;
+  overflow-x: hidden;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+p {
+  color: white;
 }
 
 .navbar {
@@ -52,14 +58,10 @@ code {
   color: white;
 }
 
-#registerBtn {
-  margin-top: 75px;
-}
-
 #formContainer {
-  width: 800px !important;
+  width: 800px;
   height: 500px;
-  /* background-color: #758bfd; */
+  background-color: #758bfd;
   display: flex;
   padding: 0 !important;
   border-radius: 15px;
@@ -67,21 +69,22 @@ code {
 }
 
 #formHeader {
-  margin-top: 0 !important;
+  margin-top: 0;
+  color: #4e52be !important;
 }
 
-.registerForm {
-  width: 50%;
-  text-align: center;
-  padding: 20px;
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .formImage {
-  width: 50%;
-  /* background-color: #aeb8fe; */
-  text-align: center;
-  padding: 40px;
-  border-radius: 15px;
+  background-color: #aeb8fe;
   color: #4e52be;
 }
 
+a:hover {
+  color: #FFFFFF !important;
+}

@@ -83,6 +83,7 @@ const Hero = ({
                                         color="primary"
                                         wideMobile
                                         href="/register"
+                                        className="mt-4 mb-0"
                                     >
                                         Get started
                                     </Button>

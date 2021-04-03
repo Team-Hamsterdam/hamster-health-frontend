@@ -5,7 +5,7 @@ import ScrollReveal from "./utils/ScrollReveal";
 import "./index.css";
 import Register from "./components/Register";
 import Login from "./components/Login";
-import Navbar1 from "./components/Navbar1";
+import Header from "./components/layout/Header";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 // Layouts
@@ -20,7 +20,7 @@ function App() {
         document.body.classList.add("is-loaded");
     }, [location]);
     return (
-        <>
+        <React.Fragment>
             <Router>
                 <AppRoute
                     exact
@@ -32,7 +32,7 @@ function App() {
                 <Route path="/register" component={Register} />
                 <Route path="/login" component={Login} />
             </Router>
-        </>
+        </React.Fragment>
     );
 }
 
