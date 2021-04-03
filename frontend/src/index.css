@@ -88,3 +88,8 @@ p {
 a:hover {
   color: #FFFFFF !important;
 }
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  color: #fff;
+  background-color: #758bfd !important;
+}

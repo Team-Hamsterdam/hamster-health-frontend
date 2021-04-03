@@ -1,30 +1,37 @@
 import React, { Component } from "react";
 import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown"
 import Nav from "react-bootstrap/Nav";
 import Image from "react-bootstrap/Image";
 import logo from "../logo.png";
+import Row from "react-bootstrap/Row";
+
 const Navbar1 = () => {
     return (
-        <Navbar variant="dark" expand="lg" className="my-0 py-0">
-            <Navbar.Brand href="/">
-                <Image style={{ width: 50, height: 50 }} src={logo} />
-                <span
-                    className="px-2 h-100 my-2"
-                    style={{ color: "#ff8600ff", fontSize: 24 }}
-                >
-                    Hamster Health
-                </span>
+        <Navbar collapseOnSelect expand="lg" bg="#27187eff" variant="dark">
+            <Navbar.Brand href="#home" className="mr-auto" style={{ fontSize: 45}}>
+                <Row>
+                <Image
+                    style={{
+                        width: 75,
+                        height: 75,
+                    }}
+                    src={logo}
+                    className="d-inline-block align-top"
+                />{' '}
+                
+                <span class='text-color-secondary'>Hamster</span> Health
+                </Row>
             </Navbar.Brand>
 
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="ml-auto">
-                    <a className="btn btn-primary mx-1 my-1" href="/register">
-                        Sign Up
-                    </a>
-                    <a className="btn btn-primary mx-1 my-1" href="/login">
-                        Sign In
-                    </a>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
+                <Nav variant="pills" className="ml-auto">
+                    <Nav.Link className="mx-2" href="#Task">Task</Nav.Link>
+                    <Nav.Link className="mx-2" href="#Progress">Progress</Nav.Link>
+                    <Nav.Link className="mx-2" href="#Logo">Logo</Nav.Link>
+                    <Nav.Link className="mx-2" href="#Profile">Profile</Nav.Link>
+                    <Nav.Link className="mx-2" href="#Rank">Rank</Nav.Link>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
