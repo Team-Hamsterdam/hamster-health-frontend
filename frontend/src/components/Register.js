@@ -7,7 +7,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Header from "./layout/Header";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
 const Register = ({ api }) => {
     const [username, setUsername] = useState("");
@@ -15,6 +15,7 @@ const Register = ({ api }) => {
     const [email, setEmail] = useState("");
     const [password1, setPassword1] = useState("");
     const [password2, setPassword2] = useState("");
+    const history = useHistory();
 
     const postRegisterInfo = async () => {
         if (!username) {
@@ -48,17 +49,17 @@ const Register = ({ api }) => {
             name: name,
         };
         console.log(api);
-        const res = await fetch(`${api}/auth/login`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(body),
-        });
 
-        if (!res.ok) {
-            const message = `An error has occured: ${res.status}`;
-            throw new Error(message);
-        } else {
-            this.props.history.push("/login");
+        try {
+            await fetch(`${api}/auth/register`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body),
+            });
+
+            history.push("/login");
+        } catch {
+            console.log("Failed to register");
         }
     };
     return (
