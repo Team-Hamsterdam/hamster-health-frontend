@@ -148,7 +148,7 @@ const Tasks = () => {
                                             variant="dark"
                                             className="w-100 my-1 text-left"
                                             id="task-button"
-                                            rounded
+                                            rounded="true"
                                             onClick={() => setTaskPreview(id)}
                                             style={
                                                 id === taskPreview
@@ -206,7 +206,7 @@ const Tasks = () => {
                                     tasks.map((task, id) => {
                                         if (id === taskPreview) {
                                             return (
-                                                <>
+                                                <React.Fragment key={id}>
                                                     <Row
                                                         md={12}
                                                         id="task-title"
@@ -266,7 +266,7 @@ const Tasks = () => {
                                                             </Button>
                                                         </Col>
                                                     </Row>
-                                                </>
+                                                </React.Fragment>
                                             );
                                         }
                                     })}

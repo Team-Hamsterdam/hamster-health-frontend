@@ -23,7 +23,7 @@ const Navbar1 = () => {
                         src={logo}
                         className="d-inline-block align-top"
                     />{" "}
-                    <span class="text-color-secondary">Hamster</span> Health
+                    <span className="text-color-secondary">Hamster</span> Health
                 </Row>
             </Navbar.Brand>
 
