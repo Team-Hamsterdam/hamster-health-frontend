@@ -40,7 +40,7 @@ $border--color: (divider: get-color(dark, 2),
 	divider-inverse: get-color(light, 1));
 
 // Icons: fill color
-$icon--color: (hamburger: get-color(light, 2), // hamburger icon
+$icon--color: (hamburger: get-color(light, 1), // hamburger icon
 	accordion: get-color(primary, 1), // accordion icon
 	social: get-color(primary, 1), // social icons
 	social-hover: get-color(primary, 2), // social icons (:hover)

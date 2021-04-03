@@ -92,7 +92,7 @@ const Header = ({
                         <>
                             <button
                                 ref={hamburger}
-                                className="header-nav-toggle"
+                                className="header-nav-toggle2"
                                 onClick={isActive ? closeMenu : openMenu}
                             >
                                 <span className="screen-reader">Menu</span>
@@ -123,7 +123,16 @@ const Header = ({
                                                     className="button button-primary button-wide-mobile button-sm"
                                                     onClick={closeMenu}
                                                 >
-                                                    Sign up
+                                                    Sign Up
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link
+                                                    to="/login"
+                                                    className="button button-primary button-wide-mobile button-sm"
+                                                    onClick={closeMenu}
+                                                >
+                                                    Sign In
                                                 </Link>
                                             </li>
                                         </ul>

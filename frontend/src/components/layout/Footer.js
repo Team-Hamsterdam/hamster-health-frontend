@@ -37,7 +37,10 @@ const Footer = ({ className, topOuterDivider, topDivider, ...props }) => {
                     </div>
                     <div className="footer-bottom space-between text-xxs invert-order-desktop">
                         <FooterNav />
-                        <div className="footer-copyright">
+                        <div
+                            className="footer-copyright"
+                            style={{ color: "white" }}
+                        >
                             Made by Team Hamsterdam for{" "}
                             <a href="https://hackiethon.hackmelb.org/">
                                 Hackiethon 2021
