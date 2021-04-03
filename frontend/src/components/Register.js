@@ -8,9 +8,56 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Header from "./layout/Header";
 import { Link } from "react-router-dom";
-const Register = () => {
+import { useState } from "react";
+const Register = ({ api }) => {
+    const [username, setUsername] = useState("");
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password1, setPassword1] = useState("");
+    const [password2, setPassword2] = useState("");
+
+    const postRegisterInfo = async () => {
+        if (!username) {
+            console.log("username can't be empty");
+            return;
+        }
+        if (!name) {
+            console.log("name can't be empty");
+            return;
+        }
+
+        if (!email) {
+            console.log("email can't be empty");
+            return;
+        }
+
+        if (!password1 || !password2) {
+            console.log("passwords can't be empty");
+            return;
+        }
+
+        if (password1 !== password2) {
+            console.log("passwords must match");
+            return;
+        }
+
+        const body = {
+            username: username,
+            password: password1,
+            email: email,
+            name: name,
+        };
+        console.log(api);
+        const token = await fetch(`${api}/auth/register`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body),
+        });
+
+        window.sessionStorage.setItem("token", token);
+    };
     return (
-        <React.Fragment>
+        <>
             <Header
                 navPosition="right"
                 className="reveal-from-bottom d-none d-md-block d-lg-block d-xl-block"
@@ -50,6 +97,9 @@ const Register = () => {
                                             className="inputBox"
                                             type="username"
                                             placeholder="Username"
+                                            onChange={(e) =>
+                                                setUsername(e.target.value)
+                                            }
                                         />
                                     </Form.Group>
                                 </Row>
@@ -65,6 +115,9 @@ const Register = () => {
                                             className="inputBox"
                                             type="name"
                                             placeholder="Name"
+                                            onChange={(e) =>
+                                                setName(e.target.value)
+                                            }
                                         />
                                     </Form.Group>
                                 </Row>
@@ -80,6 +133,9 @@ const Register = () => {
                                             className="inputBox"
                                             type="email"
                                             placeholder="Email"
+                                            onChange={(e) =>
+                                                setEmail(e.target.value)
+                                            }
                                         />
                                     </Form.Group>
                                 </Row>
@@ -95,6 +151,9 @@ const Register = () => {
                                             className="inputBox"
                                             type="password"
                                             placeholder="Password"
+                                            onChange={(e) =>
+                                                setPassword1(e.target.value)
+                                            }
                                         />
                                     </Form.Group>
                                 </Row>
@@ -110,6 +169,9 @@ const Register = () => {
                                             className="inputBox"
                                             type="password"
                                             placeholder="Confirm Password"
+                                            onChange={(e) =>
+                                                setPassword2(e.target.value)
+                                            }
                                         />
                                     </Form.Group>
                                 </Row>
@@ -122,6 +184,17 @@ const Register = () => {
                                             className="mt-2 mb-4"
                                             variant="primary"
                                             type="submit"
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                console.log(
+                                                    username,
+                                                    name,
+                                                    email,
+                                                    password1,
+                                                    password2
+                                                );
+                                                postRegisterInfo();
+                                            }}
                                         >
                                             Register
                                         </Button>
@@ -191,7 +264,7 @@ const Register = () => {
                     </Row>
                 </Row>
             </Container>
-        </React.Fragment>
+        </>
     );
 };
 
