@@ -10,8 +10,13 @@ const Tasks = () => {
     const api = "http://localhost:4000";
 
     const [tasks, setTasks] = useState([]);
+    const [ourTasks, setOurTasks] = useState([]);
+    const [customTasks, setCustomTasks] = useState([]);
     const [taskPreview, setTaskPreview] = useState(0);
     const [tasksLength, setTasksLength] = useState(0);
+    const [ourTasksBtn, setOurTasksBtn] = useState(false);
+    const [customTasksBtn, setCustomTasksBtn] = useState(false);
+    const [createTaskBtn, setCreateTaskBtn] = useState(false);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -71,51 +76,95 @@ const Tasks = () => {
                     xp: "20",
                     is_custom: false,
                 },
+            ]);
+            setOurTasks([
                 {
-                    id: 6,
-                    title: "Run 5km",
-                    desc: "run 5km??6",
+                    id: 1,
+                    title: "Sleep for 20 hours",
+                    desc: "run 5km??1",
                     xp: "20",
                     is_custom: false,
                 },
                 {
-                    id: 7,
-                    title: "Run 5km",
-                    desc: "run 5km??7",
+                    id: 2,
+                    title: "Take a 20 minute nap",
+                    desc: "run 5km??1",
                     xp: "20",
                     is_custom: false,
                 },
                 {
-                    id: 8,
-                    title: "Run 5km",
-                    desc: "run 5km??8",
+                    id: 3,
+                    title: "Eat a raw onion",
+                    desc: "run 5km??1",
                     xp: "20",
                     is_custom: false,
                 },
                 {
-                    id: 9,
-                    title: "Run 5km",
-                    desc: "run 5km??9",
+                    id: 1,
+                    title: "Sleep for 20 hours",
+                    desc: "run 5km??1",
                     xp: "20",
                     is_custom: false,
                 },
                 {
-                    id: 10,
-                    title: "Run 5km",
-                    desc: "run 5km??9",
+                    id: 2,
+                    title: "Take a 20 minute nap",
+                    desc: "run 5km??1",
                     xp: "20",
                     is_custom: false,
                 },
                 {
-                    id: 11,
-                    title: "Run 5km",
-                    desc: "run 5km??9",
+                    id: 3,
+                    title: "Eat a raw onion",
+                    desc: "run 5km??1",
+                    xp: "20",
+                    is_custom: false,
+                },
+                {
+                    id: 1,
+                    title: "Sleep for 20 hours",
+                    desc: "run 5km??1",
+                    xp: "20",
+                    is_custom: false,
+                },
+                {
+                    id: 2,
+                    title: "Take a 20 minute nap",
+                    desc: "run 5km??1",
+                    xp: "20",
+                    is_custom: false,
+                },
+                {
+                    id: 3,
+                    title: "Eat a raw onion",
+                    desc: "run 5km??1",
+                    xp: "20",
+                    is_custom: false,
+                },
+                {
+                    id: 1,
+                    title: "Sleep for 20 hours",
+                    desc: "run 5km??1",
+                    xp: "20",
+                    is_custom: false,
+                },
+                {
+                    id: 2,
+                    title: "Take a 20 minute nap",
+                    desc: "run 5km??1",
+                    xp: "20",
+                    is_custom: false,
+                },
+                {
+                    id: 3,
+                    title: "Eat a raw onion",
+                    desc: "run 5km??1",
                     xp: "20",
                     is_custom: false,
                 },
             ]);
-            const tasksFromServer = await fetchTasks();
-            setTasks(tasksFromServer);
+            // const tasksFromServer = await fetchTasks();
+            // setTasks(tasksFromServer);
             setTasksLength(tasks.length);
         };
         getTasks();
@@ -129,7 +178,57 @@ const Tasks = () => {
         console.log("task preview is ", taskPreview);
     };
 
-    const max_tasks = 10;
+    const handleOurTasksBtn = () => {
+        setOurTasksBtn(true);
+        setCustomTasksBtn(false);
+        setCreateTaskBtn(false);
+    };
+
+    const handleCustomTasksBtn = () => {
+        setCustomTasksBtn(true);
+        setOurTasksBtn(false);
+        setCreateTaskBtn(false);
+    };
+
+    const handleCreateBtn = () => {
+        setCreateTaskBtn(true);
+        setCustomTasksBtn(false);
+        setOurTasksBtn(false);
+    };
+
+    const handleTaskClick = (id) => {
+        setTaskPreview(id);
+        setOurTasksBtn(false);
+        setCustomTasksBtn(false);
+    };
+
+    const addTask = (taskName) => {
+        if (tasks.length < max_tasks) {
+            const newTask = {
+                id: tasks.length,
+                title: taskName,
+                desc: taskName,
+                xp: "20",
+                is_custom: false,
+            };
+            setTasks([...tasks, newTask]);
+        }
+    };
+
+    const addCustomTask = (taskName, desc) => {
+        if (tasks.length < max_tasks) {
+            const newTask = {
+                id: tasks.length,
+                title: taskName,
+                desc: desc,
+                xp: "20",
+                is_custom: false,
+            };
+            setCustomTasks([...customTasks, newTask]);
+        }
+    };
+
+    const max_tasks = 5;
     return (
         <>
             <Navbar1 />
@@ -152,7 +251,7 @@ const Tasks = () => {
                                             className="w-100 my-1 text-left"
                                             id="task-button"
                                             rounded="true"
-                                            onClick={() => setTaskPreview(id)}
+                                            onClick={() => handleTaskClick(id)}
                                             style={
                                                 id === taskPreview
                                                     ? {
@@ -173,17 +272,58 @@ const Tasks = () => {
                             ))}
                         <Row md={12}>
                             <Col>
-                                {tasksLength <= max_tasks ? (
-                                    <Button
-                                        className="w-100 mx-0"
-                                        variant="dark"
-                                        id="task-button2"
-                                        style={{
-                                            backgroundColor: "#31278E",
-                                        }}
-                                    >
-                                        Create New Task
-                                    </Button>
+                                {tasks.length <= max_tasks ? (
+                                    <>
+                                        <Row md={12}>
+                                            <Col md={6} className="w-50">
+                                                <Button
+                                                    className="w-100 mx-0 my-1"
+                                                    variant="dark"
+                                                    id="task-button2"
+                                                    onClick={() => {
+                                                        handleOurTasksBtn();
+                                                    }}
+                                                    style={{
+                                                        backgroundColor:
+                                                            "#31278E",
+                                                    }}
+                                                >
+                                                    Our Tasks
+                                                </Button>
+                                            </Col>
+                                            <Col md={6} className="w-50">
+                                                <Button
+                                                    className="w-100 mx-0 my-1"
+                                                    variant="dark"
+                                                    id="task-button2"
+                                                    onClick={() => {
+                                                        handleCustomTasksBtn();
+                                                    }}
+                                                    style={{
+                                                        backgroundColor:
+                                                            "#31278E",
+                                                    }}
+                                                >
+                                                    Your Tasks
+                                                </Button>
+                                            </Col>
+                                        </Row>
+                                        <Row md={12}>
+                                            <Button
+                                                className="w-100 my-1"
+                                                variant="dark"
+                                                id="task-button2"
+                                                onClick={() => {
+                                                    handleCreateBtn();
+                                                }}
+                                                style={{
+                                                    backgroundColor: "#31278E",
+                                                }}
+                                            >
+                                                Create New Task
+                                            </Button>
+                                        </Row>
+                                    </>
                                 ) : (
                                     ""
                                 )}
@@ -205,74 +345,132 @@ const Tasks = () => {
                             }}
                         >
                             <Col>
-                                {tasks &&
-                                    tasks.map((task, id) => {
-                                        if (id === taskPreview) {
-                                            return (
-                                                <React.Fragment key={id}>
-                                                    <Row
-                                                        md={12}
-                                                        id="task-title"
+                                {(createTaskBtn && (
+                                    <>
+                                        <div>Hi</div>
+                                    </>
+                                )) ||
+                                    (customTasksBtn &&
+                                        customTasks.map((customTask, id) => (
+                                            <Row key={id} md={12}>
+                                                <Col
+                                                    className="rounded py-2 w-100 text-center"
+                                                    md={12}
+                                                >
+                                                    <Button
+                                                        className="w-100 mx-0"
+                                                        variant="dark"
+                                                        id="task-button2"
+                                                        onClick={() => {
+                                                            addTask(
+                                                                customTask.title
+                                                            );
+                                                        }}
                                                         style={{
                                                             backgroundColor:
-                                                                "#31278E",
+                                                                "#FBAE5B",
                                                         }}
                                                     >
-                                                        <h2 className="px-2 w-100 text-center">
-                                                            {task.title}
-                                                        </h2>
-                                                    </Row>
-                                                    <Row md={12}>
-                                                        <p className="px-2 py-2">
-                                                            {task.desc} actual
-                                                            id is {id}
-                                                        </p>
-                                                    </Row>
-                                                    <Row md={12}>
-                                                        <Col
-                                                            md={6}
-                                                            className="px-2"
+                                                        {customTask.title}
+                                                    </Button>
+                                                </Col>
+                                            </Row>
+                                        ))) ||
+                                    (ourTasksBtn &&
+                                        ourTasks.map((ourTask, id) => (
+                                            <Row key={id} md={12}>
+                                                <Col
+                                                    className="rounded py-2 w-100 text-center"
+                                                    md={12}
+                                                >
+                                                    <Button
+                                                        className="w-100 mx-0"
+                                                        variant="dark"
+                                                        id="task-button2"
+                                                        onClick={() => {
+                                                            addTask(
+                                                                ourTask.title
+                                                            );
+                                                        }}
+                                                        style={{
+                                                            backgroundColor:
+                                                                "#FBAE5B",
+                                                        }}
+                                                    >
+                                                        {ourTask.title}
+                                                    </Button>
+                                                </Col>
+                                            </Row>
+                                        ))) ||
+                                    (tasks &&
+                                        tasks.map((task, id) => {
+                                            if (id === taskPreview) {
+                                                return (
+                                                    <React.Fragment key={id}>
+                                                        <Row
+                                                            md={12}
+                                                            id="task-title"
+                                                            style={{
+                                                                backgroundColor:
+                                                                    "#31278E",
+                                                            }}
                                                         >
-                                                            <Button
-                                                                className="w-100 mx-0"
-                                                                variant="dark"
-                                                                id="task-button2"
-                                                                style={{
-                                                                    backgroundColor:
-                                                                        "#31278E",
-                                                                }}
+                                                            <h2 className="px-2 w-100 text-center">
+                                                                {task.title}
+                                                            </h2>
+                                                        </Row>
+                                                        <Row md={12}>
+                                                            <p className="px-2 py-2">
+                                                                {task.desc}{" "}
+                                                                actual id is{" "}
+                                                                {id}
+                                                            </p>
+                                                        </Row>
+                                                        <Row md={12}>
+                                                            <Col
+                                                                md={6}
+                                                                className="px-2"
                                                             >
-                                                                Mark as finished
-                                                                (+
-                                                                {task.xp}XP)
-                                                            </Button>
-                                                        </Col>
-                                                        <Col
-                                                            md={6}
-                                                            className="px-2"
-                                                        >
-                                                            <Button
-                                                                variant="dark"
-                                                                id="task-button2"
-                                                                className="w-100 mx-0"
-                                                                onClick={() =>
-                                                                    removeTask(
-                                                                        id
-                                                                    )
-                                                                }
-                                                                style={{
-                                                                    backgroundColor:
-                                                                        "#31278E",
-                                                                }}
+                                                                <Button
+                                                                    className="w-100 mx-0"
+                                                                    variant="dark"
+                                                                    id="task-button2"
+                                                                    style={{
+                                                                        backgroundColor:
+                                                                            "#31278E",
+                                                                    }}
+                                                                >
+                                                                    Mark as
+                                                                    finished (+
+                                                                    {task.xp}XP)
+                                                                </Button>
+                                                            </Col>
+                                                            <Col
+                                                                md={6}
+                                                                className="px-2"
                                                             >
-                                                                Remove Task
-                                                            </Button>
-                                                        </Col>
-                                                    </Row>
-                                                </React.Fragment>
-                                            );
-                                        }
-                                    })}
+                                                                <Button
+                                                                    variant="dark"
+                                                                    id="task-button2"
+                                                                    className="w-100 mx-0"
+                                                                    onClick={() =>
+                                                                        removeTask(
+                                                                            id
+                                                                        )
+                                                                    }
+                                                                    style={{
+                                                                        backgroundColor:
+                                                                            "#31278E",
+                                                                    }}
+                                                                >
+                                                                    Remove Task
+                                                                </Button>
+                                                            </Col>
+                                                        </Row>
+                                                    </React.Fragment>
+                                                );
+                                            }
+                                        }))}
                             </Col>
                         </Row>
                     </Col>
