@@ -22,6 +22,10 @@ code {
 .btn-primary {
   background-color: #27187eff !important;
   border-color: #fca13eff !important;
+  color: white;
+  border-radius: 15px;
+  height: 50px;
+  width: 200px;
 }
 
 .btn-primary:hover {
@@ -37,3 +41,47 @@ code {
   background-size: cover;
   z-index: -10;
 }
+
+.inputBox {
+  margin: 5px;
+  background-color: #aeb8fe;
+  border-style: none;
+}
+
+::placeholder {
+  color: white;
+}
+
+#registerBtn {
+  margin-top: 75px;
+}
+
+#formContainer {
+  width: 800px !important;
+  height: 500px;
+  /* background-color: #758bfd; */
+  display: flex;
+  padding: 0 !important;
+  border-radius: 15px;
+  min-height: 100vh;
+}
+
+#formHeader {
+  margin-top: 0 !important;
+}
+
+.registerForm {
+  width: 50%;
+  text-align: center;
+  padding: 20px;
+}
+
+.formImage {
+  width: 50%;
+  /* background-color: #aeb8fe; */
+  text-align: center;
+  padding: 40px;
+  border-radius: 15px;
+  color: #4e52be;
+}
+
