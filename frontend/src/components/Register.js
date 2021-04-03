@@ -50,7 +50,6 @@ const Register = () => {
             email: email,
             name: name,
         };
-        console.log(api);
 
         try {
             const res = await fetch(`${api}/auth/register`, {

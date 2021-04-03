@@ -12,11 +12,13 @@ const Tasks = () => {
 
     const [tasks, setTasks] = useState([]);
     const [taskPreview, setTaskPreview] = useState(0);
+    const [tasksLength, setTasksLength] = useState(0);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
         const fetchTasks = async () => {
             try {
+                console.log("token is", token);
                 const res = await fetch(`${api}/task/gettasks`, {
                     method: "GET",
                     headers: {
@@ -26,6 +28,7 @@ const Tasks = () => {
                 });
 
                 const data = await res.json();
+
                 return data.tasks;
             } catch {
                 console.log("Error getting tasks");
@@ -33,8 +36,6 @@ const Tasks = () => {
             }
         };
         const getTasks = async () => {
-            // const tasksFromServer = await fetchTasks();
-            // setTasks(tasksFromServer);
             setTasks([
                 {
                     id: 1,
@@ -114,6 +115,9 @@ const Tasks = () => {
                     is_custom: false,
                 },
             ]);
+            const tasksFromServer = await fetchTasks();
+            setTasks(tasksFromServer);
+            setTasksLength(tasks.length);
         };
         getTasks();
     }, []);
@@ -170,7 +174,7 @@ const Tasks = () => {
                             ))}
                         <Row md={12}>
                             <Col>
-                                {tasks.length <= max_tasks ? (
+                                {tasksLength <= max_tasks ? (
                                     <Button
                                         className="w-100 mx-0"
                                         variant="dark"

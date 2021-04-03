@@ -30,7 +30,7 @@ const Login = () => {
             username: username,
             password: password,
         };
-        console.log(api);
+
         try {
             const res = await fetch(`${api}/auth/login`, {
                 method: "POST",
