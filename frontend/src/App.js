@@ -5,7 +5,7 @@ import ScrollReveal from "./utils/ScrollReveal";
 import "./index.css";
 import Register from "./components/Register";
 import Login from "./components/Login";
-import Navbar1 from "./components/Navbar1";
+import Header from "./components/layout/Header";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 // Layouts
@@ -16,11 +16,15 @@ import Home from "./views/Home";
 
 function App() {
     let location = useLocation();
+    const api = "http://localhost:5500";
+
     useEffect(() => {
         document.body.classList.add("is-loaded");
     }, [location]);
+
+    console.log(api);
     return (
-        <>
+        <React.Fragment>
             <Router>
                 <AppRoute
                     exact
@@ -29,10 +33,13 @@ function App() {
                     layout={LayoutDefault}
                 />
 
-                <Route path="/register" component={Register} />
+                <Route
+                    path="/register"
+                    render={(props) => <Register {...props} api={api} />}
+                />
                 <Route path="/login" component={Login} />
             </Router>
-        </>
+        </React.Fragment>
     );
 }
 
