@@ -58,7 +58,7 @@ const Login = ({ api }) => {
                             md={6}
                             className="w-100 formImage py-2 px-0 mx-0 rounded"
                         >
-                            <Row md={12} className="justify-content-md-center">
+                            <Row md={12} className="justify-content-center">
                                 <h3
                                     className="w-100 text-center"
                                     style={{ marginTop: 30 }}
@@ -69,21 +69,23 @@ const Login = ({ api }) => {
                             </Row>
                             <Row
                                 md={12}
-                                className="justify-content-md-center m-auto"
+                                className="justify-content-center m-auto"
                             >
                                 <Link to="/">
-                                    <Image
-                                        className="mx-auto"
-                                        style={{
-                                            width: 125,
-                                            height: 125,
-                                            cursor: "pointer",
-                                        }}
-                                        src={logo}
-                                    />
+                                    <div className="text-center">
+                                        <Image
+                                            className=" "
+                                            style={{
+                                                width: 125,
+                                                height: 125,
+                                                cursor: "pointer",
+                                            }}
+                                            src={logo}
+                                        />
+                                    </div>
                                 </Link>
                             </Row>
-                            <Row md={12} className="justify-content-md-center">
+                            <Row md={12} className="justify-content-center">
                                 <p
                                     className="w-100 text-center"
                                     style={{ color: "#4e52be" }}
@@ -91,7 +93,7 @@ const Login = ({ api }) => {
                                     Log in to continue reaching your goals!
                                 </p>
                             </Row>
-                            <Row md={12} className="justify-content-md-center">
+                            <Row md={12} className="justify-content-center">
                                 <p
                                     className="w-100 text-center mt-2 mb-1"
                                     style={{ fontSize: 15, color: "#4e52be" }}
@@ -99,7 +101,7 @@ const Login = ({ api }) => {
                                     Need an account?
                                 </p>
                             </Row>
-                            <Row md={12} className="justify-content-md-center">
+                            <Row md={12} className="justify-content-center">
                                 <div className="w-100 text-center">
                                     <Link
                                         to="/register"
@@ -117,18 +119,12 @@ const Login = ({ api }) => {
                             style={{ backgroundColor: "#758bfd" }}
                         >
                             <Form>
-                                <Row
-                                    className="justify-content-md-center"
-                                    md={12}
-                                >
+                                <Row className="justify-content-center" md={12}>
                                     <h2 className="formHeader w-100 text-center my-4">
                                         Log In
                                     </h2>
                                 </Row>
-                                <Row
-                                    className="justify-content-md-center"
-                                    md={12}
-                                >
+                                <Row className="justify-content-center" md={12}>
                                     <Form.Group
                                         className="w-100 px-4"
                                         controlId="formBasicUsername"
@@ -144,10 +140,7 @@ const Login = ({ api }) => {
                                     </Form.Group>
                                 </Row>
 
-                                <Row
-                                    className="justify-content-md-center"
-                                    md={12}
-                                >
+                                <Row className="justify-content-center" md={12}>
                                     <Form.Group
                                         className="w-100 px-4"
                                         controlId="formBasicPassword"
@@ -162,10 +155,7 @@ const Login = ({ api }) => {
                                         />
                                     </Form.Group>
                                 </Row>
-                                <Row
-                                    className="justify-content-md-center"
-                                    md={12}
-                                >
+                                <Row className="justify-content-center" md={12}>
                                     <div className="w-100 text-center">
                                         <Button
                                             className="mt-2 mb-4"

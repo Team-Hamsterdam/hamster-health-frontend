@@ -82,18 +82,12 @@ const Register = ({ api }) => {
                             style={{ backgroundColor: "#758bfd" }}
                         >
                             <Form>
-                                <Row
-                                    className="justify-content-md-center"
-                                    md={12}
-                                >
+                                <Row className="justify-content-center" md={12}>
                                     <h2 className="formHeader w-100 text-center my-4">
                                         Register
                                     </h2>
                                 </Row>
-                                <Row
-                                    className="justify-content-md-center"
-                                    md={12}
-                                >
+                                <Row className="justify-content-center" md={12}>
                                     <Form.Group
                                         className="w-100 px-4"
                                         controlId="formBasicUsername"
@@ -108,10 +102,7 @@ const Register = ({ api }) => {
                                         />
                                     </Form.Group>
                                 </Row>
-                                <Row
-                                    className="justify-content-md-center"
-                                    md={12}
-                                >
+                                <Row className="justify-content-center" md={12}>
                                     <Form.Group
                                         className="w-100 px-4"
                                         controlId="formBasicName"
@@ -126,10 +117,7 @@ const Register = ({ api }) => {
                                         />
                                     </Form.Group>
                                 </Row>
-                                <Row
-                                    className="justify-content-md-center"
-                                    md={12}
-                                >
+                                <Row className="justify-content-center" md={12}>
                                     <Form.Group
                                         className="w-100 px-4"
                                         controlId="formBasicEmail"
@@ -144,10 +132,7 @@ const Register = ({ api }) => {
                                         />
                                     </Form.Group>
                                 </Row>
-                                <Row
-                                    className="justify-content-md-center"
-                                    md={12}
-                                >
+                                <Row className="justify-content-center" md={12}>
                                     <Form.Group
                                         className="w-100 px-4"
                                         controlId="formBasicPassword"
@@ -162,10 +147,7 @@ const Register = ({ api }) => {
                                         />
                                     </Form.Group>
                                 </Row>
-                                <Row
-                                    className="justify-content-md-center"
-                                    md={12}
-                                >
+                                <Row className="justify-content-center" md={12}>
                                     <Form.Group
                                         className="w-100 px-4"
                                         controlId="formBasicConfirmPassword"
@@ -180,10 +162,7 @@ const Register = ({ api }) => {
                                         />
                                     </Form.Group>
                                 </Row>
-                                <Row
-                                    className="justify-content-md-center"
-                                    md={12}
-                                >
+                                <Row className="justify-content-center" md={12}>
                                     <div className="w-100 text-center">
                                         <Button
                                             className="mt-2 mb-4"
@@ -212,7 +191,7 @@ const Register = ({ api }) => {
                             md={6}
                             className="w-100 formImage py-2 px-0 mx-0 rounded"
                         >
-                            <Row md={12} className="justify-content-md-center">
+                            <Row md={12} className="justify-content-center">
                                 <h3
                                     className="w-100 text-center"
                                     style={{ marginTop: 30 }}
@@ -221,13 +200,10 @@ const Register = ({ api }) => {
                                     Welcome to Hamster Health
                                 </h3>
                             </Row>
-                            <Row
-                                md={12}
-                                className="justify-content-md-center m-auto"
-                            >
-                                <Link to="/">
+                            <Row md={12} className="justify-content-center">
+                                <div className="text-center">
                                     <Image
-                                        className="mx-auto"
+                                        className=" "
                                         style={{
                                             width: 125,
                                             height: 125,
@@ -235,9 +211,9 @@ const Register = ({ api }) => {
                                         }}
                                         src={logo}
                                     />
-                                </Link>
+                                </div>
                             </Row>
-                            <Row md={12} className="justify-content-md-center">
+                            <Row md={12} className="justify-content-center">
                                 <p
                                     className="w-100 text-center"
                                     style={{ color: "#4e52be" }}
@@ -246,7 +222,7 @@ const Register = ({ api }) => {
                                     goals!
                                 </p>
                             </Row>
-                            <Row md={12} className="justify-content-md-center">
+                            <Row md={12} className="justify-content-center">
                                 <p
                                     className="w-100 text-center mt-2 mb-1"
                                     style={{ fontSize: 15, color: "#4e52be" }}
@@ -254,7 +230,7 @@ const Register = ({ api }) => {
                                     Already have an account?
                                 </p>
                             </Row>
-                            <Row md={12} className="justify-content-md-center">
+                            <Row md={12} className="justify-content-center">
                                 <div className="w-100 text-center">
                                     <Link
                                         to="/login"
