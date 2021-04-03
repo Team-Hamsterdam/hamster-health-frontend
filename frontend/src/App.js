@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import Header from "./components/layout/Header";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Tasks from "./components/Tasks";
+import Leaderboard from "./components/Leaderboard"
 
 // Layouts
 import LayoutDefault from "./layouts/LayoutDefault";
