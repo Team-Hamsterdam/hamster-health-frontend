@@ -5,8 +5,10 @@ import ScrollReveal from "./utils/ScrollReveal";
 import "./index.css";
 import Register from "./components/Register";
 import Login from "./components/Login";
+import Tasks from "./components/Tasks";
 import Header from "./components/layout/Header";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute";
 
 // Layouts
 import LayoutDefault from "./layouts/LayoutDefault";
@@ -16,7 +18,6 @@ import Home from "./views/Home";
 
 function App() {
     let location = useLocation();
-    const api = "http://localhost:5500";
 
     useEffect(() => {
         document.body.classList.add("is-loaded");
@@ -33,14 +34,9 @@ function App() {
                     layout={LayoutDefault}
                 />
 
-                <Route
-                    path="/register"
-                    render={(props) => <Register {...props} api={api} />}
-                />
-                <Route
-                    path="/login"
-                    render={(props) => <Login {...props} api={api} />}
-                />
+                <Route path="/register" render={(props) => <Register />} />
+                <Route path="/login" render={(props) => <Login />} />
+                <PrivateRoute path="/tasks" component={Tasks} />
             </Router>
         </React.Fragment>
     );

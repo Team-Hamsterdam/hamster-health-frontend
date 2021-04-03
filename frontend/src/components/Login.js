@@ -9,8 +9,9 @@ import Col from "react-bootstrap/Col";
 import Header from "./layout/Header";
 import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
+import { api } from "./Api";
 
-const Login = ({ api }) => {
+const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const history = useHistory();
@@ -37,9 +38,11 @@ const Login = ({ api }) => {
                 body: JSON.stringify(body),
             });
             const data = await res.json();
-
-            localStorage.setItem("token", data.token);
-            history.push("/tasks");
+            if (res.ok) {
+                localStorage.setItem("token", data.token);
+                history.push("/tasks");
+                console.log("YES");
+            }
         } catch {
             console.log("Failed logging in");
         }
