@@ -18,6 +18,10 @@ const Login = ({ api }) => {
             console.log("username can't be empty");
             return;
         }
+        if (!password) {
+            console.log("password can't be empty");
+            return;
+        }
 
         const body = {
             username: username,
