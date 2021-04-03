@@ -26,8 +26,8 @@ const Navbar1 = () => {
 
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
-                <Nav variant="pills" className="ml-auto">
-                    <Nav.Link className="mx-2" href="#Task">Task</Nav.Link>
+                <Nav variant="pills" className="ml-auto" defaultActiveKey="/task">
+                    <Nav.Link href="/task" className="mx-2" href="#Task">Task</Nav.Link>
                     <Nav.Link className="mx-2" href="#Progress">Progress</Nav.Link>
                     <Nav.Link className="mx-2" href="#Logo">Logo</Nav.Link>
                     <Nav.Link className="mx-2" href="#Profile">Profile</Nav.Link>

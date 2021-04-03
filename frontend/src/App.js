@@ -42,11 +42,6 @@ function App() {
                     path="/login"
                     render={(props) => <Login {...props} api={api} />}
                 />
-
-                <Route path='/navbar'>
-                    <Navbar1 />
-                </Route>
-
             </Router>
         </React.Fragment>
     );
