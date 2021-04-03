@@ -5,6 +5,7 @@ import ButtonGroup from "../elements/ButtonGroup";
 import Button from "../elements/Button";
 import Image from "../elements/Image";
 import Modal from "../elements/Modal";
+import { Link } from "react-router-dom";
 
 const propTypes = {
     ...SectionProps.types,
@@ -78,15 +79,15 @@ const Hero = ({
                                 data-reveal-delay="600"
                             >
                                 <ButtonGroup>
-                                    <Button
-                                        tag="a"
-                                        color="primary"
-                                        wideMobile
-                                        href="/register"
-                                        className="mt-4 mb-0"
-                                    >
-                                        Get started
-                                    </Button>
+                                    <Link to="/register">
+                                        <Button
+                                            color="primary"
+                                            wideMobile
+                                            className="mt-4 mb-0"
+                                        >
+                                            Get started
+                                        </Button>
+                                    </Link>
                                 </ButtonGroup>
                             </div>
                         </div>

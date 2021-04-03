@@ -90,7 +90,7 @@ const Login = ({ api }) => {
                                     className="w-100 text-center"
                                     style={{ color: "#4e52be" }}
                                 >
-                                    Log in to continue reaching your goals!
+                                    Continue reaching your goals!
                                 </p>
                             </Row>
                             <Row md={12} className="justify-content-center">

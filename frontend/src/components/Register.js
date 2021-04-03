@@ -201,25 +201,30 @@ const Register = ({ api }) => {
                                 </h3>
                             </Row>
                             <Row md={12} className="justify-content-center">
-                                <div className="text-center">
-                                    <Image
-                                        className=" "
-                                        style={{
-                                            width: 125,
-                                            height: 125,
-                                            cursor: "pointer",
-                                        }}
-                                        src={logo}
-                                    />
-                                </div>
+                                <Link to="/">
+                                    <div className="text-center">
+                                        <Image
+                                            className=" "
+                                            style={{
+                                                width: 125,
+                                                height: 125,
+                                                cursor: "pointer",
+                                            }}
+                                            src={logo}
+                                        />
+                                    </div>
+                                </Link>
                             </Row>
-                            <Row md={12} className="justify-content-center">
+                            <Row
+                                md={12}
+                                sm={3}
+                                className="justify-content-center"
+                            >
                                 <p
                                     className="w-100 text-center"
                                     style={{ color: "#4e52be" }}
                                 >
-                                    Register to start working towards your
-                                    goals!
+                                    Start working towards your goals!
                                 </p>
                             </Row>
                             <Row md={12} className="justify-content-center">
