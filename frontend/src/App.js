@@ -7,6 +7,7 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Header from "./components/layout/Header";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import Tasks from "./components/Tasks";
 
 // Layouts
 import LayoutDefault from "./layouts/LayoutDefault";
@@ -41,6 +42,7 @@ function App() {
                     path="/login"
                     render={(props) => <Login {...props} api={api} />}
                 />
+                <Route path="/tasks" render={(props) => <Tasks {...props} />} />
             </Router>
         </React.Fragment>
     );
