@@ -7,11 +7,14 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Header from "./layout/Header";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
-const Login = ({ api }) => {
+import { api } from "./Api";
+
+const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const history = useHistory();
 
     const postLoginInfo = async () => {
         if (!username) {
@@ -28,20 +31,24 @@ const Login = ({ api }) => {
             password: password,
         };
         console.log(api);
-        const res = await fetch(`${api}/auth/login`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(body),
-        });
-
-        if (!res.ok) {
-            const message = `An error has occured: ${res.status}`;
-            throw new Error(message);
+        try {
+            const res = await fetch(`${api}/auth/login`, {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(body),
+            });
+            const data = await res.json();
+            if (res.ok) {
+                localStorage.setItem("token", data.token);
+                history.push("/tasks");
+                console.log("YES");
+            }
+        } catch {
+            console.log("Failed logging in");
         }
-
-        const token = await res.json();
-
-        window.sessionStorage.setItem("token", token);
     };
     return (
         <>
