@@ -9,6 +9,8 @@ import Tasks from "./components/Tasks";
 import Header from "./components/layout/Header";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
+import Tasks from "./components/Tasks";
+
 
 // Layouts
 import LayoutDefault from "./layouts/LayoutDefault";
@@ -34,9 +36,11 @@ function App() {
                     layout={LayoutDefault}
                 />
 
+
                 <Route path="/register" render={(props) => <Register />} />
                 <Route path="/login" render={(props) => <Login />} />
                 <PrivateRoute path="/tasks" component={Tasks} />
+
             </Router>
         </React.Fragment>
     );

@@ -48,6 +48,16 @@ p {
   z-index: -10;
 }
 
+.tasks-container {
+  background: url(assets/images/taskbackground.png) !important;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  height: 100%;
+  background-size: cover;
+  z-index: -10;
+}
+
 .inputBox {
   margin: 5px;
   background-color: #aeb8fe;
@@ -87,4 +97,68 @@ p {
 
 a:hover {
   color: #FFFFFF !important;
+}
+
+#task-button {
+
+  outline: none !important;
+  border: none;
+}
+
+#task-button:hover {
+  background-color: #4e52beff !important;
+}
+
+#task-button:focus {
+  background-color: #fca13eff !important;
+  color: white;
+}
+
+
+#task-button2 {
+
+  outline: none !important;
+  border: none;
+}
+
+#task-button2:hover {
+  background-color: #fca13eff !important;
+}
+
+#task-button2:focus {
+  background-color: #fca13eff !important;
+  color: white;
+}
+
+#task-desc {
+
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  min-height: 800px;
+  max-height: 900px;
+
+}
+
+#task-title {
+  border: 1px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.orange-text {
+  color: #FBAE5B;
+}
+
+.max-height {
+  min-height: 88vh;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+  color: #fff;
+  background-color: #758bfd !important;
 }
