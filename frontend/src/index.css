@@ -39,7 +39,7 @@ p {
 }
 
 .background1 {
-  background: url(assets/images/background2.png) !important;
+  background: url(assets/images/background1.png) !important;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

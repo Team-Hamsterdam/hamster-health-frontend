@@ -22,7 +22,7 @@ function App() {
         document.body.classList.add("is-loaded");
     }, [location]);
 
-    console.log(api);
+    document.getElementById("root").classList.add("background1");
     return (
         <React.Fragment>
             <Router>
