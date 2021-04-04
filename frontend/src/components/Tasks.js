@@ -22,7 +22,8 @@ const Tasks = () => {
   const [alertText, setAlertText] = useState("");
   const [alertType, setAlertType] = useState("danger");
   const [showAlert, setShowAlert] = useState(false);
-  const max_custom_tasks = 8;
+  const max_custom_tasks = 7;
+  const max_tasks = 9;
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -208,21 +209,17 @@ const Tasks = () => {
       // ]);
       const tasksFromServer = await fetchActiveTasks();
       if (tasksFromServer) setTasks(tasksFromServer);
-      console.log("active tasks", tasksFromServer);
 
       const ourTasksFromServer = await fetchOurTasks();
       if (ourTasksFromServer) setOurTasks(ourTasksFromServer);
-      console.log("our tasks", ourTasksFromServer);
 
       const customTasksFromServer = await fetchCustomTasks();
       if (customTasksFromServer) setCustomTasks(customTasksFromServer);
-      console.log("custom tasks", customTasksFromServer);
     };
     getTasks();
   }, []);
 
   const removeTask = async (task) => {
-    console.log("about to remove task with task id ", task.task_id);
     const token = localStorage.getItem("token");
 
     try {
@@ -241,7 +238,6 @@ const Tasks = () => {
       const data = await res.json();
 
       if (res.ok) {
-        console.log("task successfully added to active tasks");
         const newTasks = tasks;
         const index = tasks.map((e) => e.task_id).indexOf(task.task_id);
 
@@ -281,7 +277,6 @@ const Tasks = () => {
 
   const addTask = async (task) => {
     const token = localStorage.getItem("token");
-    console.log(tasks.length);
     setCustomTitle("");
     setCustomDesc("");
     if (tasks.length < max_tasks) {
@@ -289,9 +284,6 @@ const Tasks = () => {
         const body = {
           task_id: task.task_id,
         };
-        console.log("XXXXXXXXXXXXXXXX");
-        console.log(task);
-        console.log(body);
         const res = await fetch(`${api}/task/addactivetask`, {
           method: "POST",
           headers: {
@@ -304,7 +296,6 @@ const Tasks = () => {
 
         const data = await res.json();
         if (res.ok) {
-          console.log("task successfully added to active tasks");
           const newTask = {
             task_id: task.task_id,
             title: task.title,
@@ -317,7 +308,6 @@ const Tasks = () => {
           setShowAlert(true);
           setAlertType("danger");
           setAlertText(`${data.message}`);
-          console.log(data);
         }
       } catch (e) {
         console.warn(e);
@@ -424,7 +414,6 @@ const Tasks = () => {
     }
   };
 
-  const max_tasks = 5;
   return (
     <>
       <Navbar1 />

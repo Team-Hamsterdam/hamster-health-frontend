@@ -166,7 +166,6 @@ const Register = () => {
                       type="submit"
                       onClick={(e) => {
                         e.preventDefault();
-                        console.log(username, name, email, password1, password2);
                         postRegisterInfo();
                       }}
                     >

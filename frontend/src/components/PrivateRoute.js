@@ -21,8 +21,8 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
       });
       const data = await res.json();
       return data.token;
-    } catch {
-      console.log("Failed checking");
+    } catch (e) {
+      console.warn(e);
     }
 
     if (token != null) {

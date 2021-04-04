@@ -25,8 +25,8 @@ const Profile = () => {
 
         const data = await res.json();
         return data;
-      } catch {
-        console.log("Error loading user info");
+      } catch (e) {
+        console.warn(e);
       }
     };
     const getUsers = async () => {

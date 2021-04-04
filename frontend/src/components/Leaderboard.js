@@ -28,14 +28,12 @@ const Leaderboard = () => {
 
         const data = await res.json();
         return data;
-      } catch {
-        console.log("Error getting leaderboard");
-        console.log(leaderboard);
+      } catch (e) {
+        console.warn(e);
       }
     };
     const getLeaderboard = async () => {
       const leaderboardFromServer = await fetchLeaderboard();
-      console.log(leaderboardFromServer);
       if (leaderboardFromServer) {
         sortMap(leaderboardFromServer.users);
         setLeaderboard(leaderboardFromServer.users);
@@ -307,7 +305,6 @@ const Leaderboard = () => {
 
     const loadUser = async () => {
       try {
-        console.log("token is", token);
         const res = await fetch(`${api}/user/details`, {
           method: "GET",
           headers: {
@@ -318,18 +315,18 @@ const Leaderboard = () => {
 
         const data = await res.json();
         return data;
-      } catch {
-        console.log("Error loading user info");
+      } catch (e) {
+        console.warn(e);
       }
     };
     const getUsers = async () => {
       const infoFromServer = await loadUser();
       if (infoFromServer) {
-        setUsername(infoFromServer.username);
-        setLevel(infoFromServer.level);
-        setRank(infoFromServer.rank);
+        setUsername(infoFromServer.user.username);
+        setLevel(infoFromServer.user.level);
+        setRank(infoFromServer.user.rank);
       } else {
-        setUsername('Jesuson');
+        setUsername("Jesuson");
         setLevel(69);
         setRank(7);
       }
@@ -353,27 +350,25 @@ const Leaderboard = () => {
             <h1 className="text-center">Leaderboard</h1>
           </Col>
 
-
           <Col className="py-2 mb-2" md={12} style={{ backgroundColor: "#4E52BE" }}>
             <Row className="px-2" md={12}>
-                <Col
-                    className="userEntry my-1 rounded"
-                    style={{
-                    backgroundColor: "#ff8600ff",
-                    border: "solid #ff8600ff",
-                    }}
-                    md={12}
-                >
-                    <b style={{ color: "white" }}>
-                    {rank}. {username}
-                    </b>
-                    <b className="float-right" style={{ color: "white" }}>
-                    Level {level}
-                    </b>
-                </Col>
+              <Col
+                className="userEntry my-1 rounded"
+                style={{
+                  backgroundColor: "#ff8600ff",
+                  border: "solid #ff8600ff",
+                }}
+                md={12}
+              >
+                <b style={{ color: "white" }}>
+                  {rank}. {username}
+                </b>
+                <b className="float-right" style={{ color: "white" }}>
+                  Level {level}
+                </b>
+              </Col>
             </Row>
-        </Col>
-
+          </Col>
 
           <Col className="py-2" md={12} style={{ backgroundColor: "#4E52BE" }}>
             {leaderboard &&
