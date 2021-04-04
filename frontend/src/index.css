@@ -162,3 +162,7 @@ a:hover {
   color: #fff;
   background-color: #758bfd !important;
 }
+
+.h2-size {
+  font-size: 32px !important;
+}

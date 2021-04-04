@@ -4,6 +4,7 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 import Navbar1 from "./Navbar1";
 
 const Tasks = () => {
@@ -17,6 +18,8 @@ const Tasks = () => {
     const [ourTasksBtn, setOurTasksBtn] = useState(false);
     const [customTasksBtn, setCustomTasksBtn] = useState(false);
     const [createTaskBtn, setCreateTaskBtn] = useState(false);
+    const [customTitle, setCustomTitle] = useState("");
+    const [customDesc, setCustomDesc] = useState("");
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -171,10 +174,15 @@ const Tasks = () => {
     }, []);
 
     const removeTask = (id) => {
+        console.log(id);
+
         const newTasks = tasks;
         newTasks.splice(id, 1);
         setTasks(newTasks);
-        setTaskPreview(-1);
+        if (id === 0) {
+            handleTaskClick(-1);
+        }
+        handleTaskClick(id - 1);
         console.log("task preview is ", taskPreview);
     };
 
@@ -200,31 +208,38 @@ const Tasks = () => {
         setTaskPreview(id);
         setOurTasksBtn(false);
         setCustomTasksBtn(false);
+        setCreateTaskBtn(false);
     };
 
-    const addTask = (taskName) => {
+    const addTask = (task) => {
+        console.log(tasks.length);
         if (tasks.length < max_tasks) {
             const newTask = {
                 id: tasks.length,
-                title: taskName,
-                desc: taskName,
+                title: task.title,
+                desc: task.desc,
                 xp: "20",
                 is_custom: false,
             };
             setTasks([...tasks, newTask]);
         }
+        if (tasks.length === max_tasks - 1) {
+            handleTaskClick(tasks.length);
+        }
     };
 
-    const addCustomTask = (taskName, desc) => {
-        if (tasks.length < max_tasks) {
+    const handleAddCustomTask = () => {
+        console.log("added new task");
+        if (customTitle.length > 0 && customDesc.length > 0) {
             const newTask = {
                 id: tasks.length,
-                title: taskName,
-                desc: desc,
+                title: customTitle,
+                desc: customDesc,
                 xp: "20",
                 is_custom: false,
             };
             setCustomTasks([...customTasks, newTask]);
+            console.log("added new task", newTask);
         }
     };
 
@@ -272,7 +287,7 @@ const Tasks = () => {
                             ))}
                         <Row md={12}>
                             <Col>
-                                {tasks.length <= max_tasks ? (
+                                {tasks.length < max_tasks ? (
                                     <>
                                         <Row md={12}>
                                             <Col md={6} className="w-50">
@@ -346,9 +361,65 @@ const Tasks = () => {
                         >
                             <Col>
                                 {(createTaskBtn && (
-                                    <>
-                                        <div>Hi</div>
-                                    </>
+                                    <Form>
+                                        <Row
+                                            md={12}
+                                            id="task-title"
+                                            className="justify-content-center h2-size"
+                                            style={{
+                                                backgroundColor: "#31278E",
+                                            }}
+                                        >
+                                            <Form.Group controlId="formBasicTitle">
+                                                <Form.Control
+                                                    className="h2-size text-center"
+                                                    type="text"
+                                                    placeholder="Enter Title"
+                                                    onChange={(e) =>
+                                                        setCustomTitle(
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                />
+                                            </Form.Group>
+                                        </Row>
+                                        <Row md={12}>
+                                            <Form.Group
+                                                className="w-100 mt-2 mx-2"
+                                                controlId="formBasicDesc"
+                                            >
+                                                <Form.Control
+                                                    type="text"
+                                                    placeholder="Enter Description"
+                                                    onChange={(e) =>
+                                                        setCustomDesc(
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                />
+                                            </Form.Group>
+                                        </Row>
+                                        <Row md={12}>
+                                            <Col md={12} className="px-2">
+                                                <Button
+                                                    className="w-100 mx-0"
+                                                    variant="dark"
+                                                    id="task-button2"
+                                                    type="submit"
+                                                    onClick={(e) => {
+                                                        e.preventDefault();
+                                                        handleAddCustomTask();
+                                                    }}
+                                                    style={{
+                                                        backgroundColor:
+                                                            "#31278E",
+                                                    }}
+                                                >
+                                                    Add Task
+                                                </Button>
+                                            </Col>
+                                        </Row>
+                                    </Form>
                                 )) ||
                                     (customTasksBtn &&
                                         customTasks.map((customTask, id) => (
@@ -362,13 +433,11 @@ const Tasks = () => {
                                                         variant="dark"
                                                         id="task-button2"
                                                         onClick={() => {
-                                                            addTask(
-                                                                customTask.title
-                                                            );
+                                                            addTask(customTask);
                                                         }}
                                                         style={{
                                                             backgroundColor:
-                                                                "#FBAE5B",
+                                                                "#ff8600ff",
                                                         }}
                                                     >
                                                         {customTask.title}
@@ -388,13 +457,11 @@ const Tasks = () => {
                                                         variant="dark"
                                                         id="task-button2"
                                                         onClick={() => {
-                                                            addTask(
-                                                                ourTask.title
-                                                            );
+                                                            addTask(ourTask);
                                                         }}
                                                         style={{
                                                             backgroundColor:
-                                                                "#FBAE5B",
+                                                                "#ff8600ff",
                                                         }}
                                                     >
                                                         {ourTask.title}
