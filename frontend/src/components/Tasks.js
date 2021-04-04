@@ -38,9 +38,10 @@ const Tasks = () => {
 
         const data = await res.json();
         return data.tasks;
-      } catch {
-        console.log("Error getting tasks");
-        console.log(tasks);
+      } catch (e) {
+        console.warn(e);
+        setShowAlert(true);
+        setAlertText(`An unexpected error has occured`);
       }
     };
     const fetchOurTasks = async () => {
@@ -56,9 +57,10 @@ const Tasks = () => {
         const data = await res.json();
 
         return data.tasks;
-      } catch {
-        console.log("Error getting tasks");
-        console.log(tasks);
+      } catch (e) {
+        console.warn(e);
+        setShowAlert(true);
+        setAlertText(`An unexpected error has occured`);
       }
     };
     const fetchCustomTasks = async () => {
@@ -74,9 +76,10 @@ const Tasks = () => {
         const data = await res.json();
 
         return data.tasks;
-      } catch {
-        console.log("Error getting tasks");
-        console.log(tasks);
+      } catch (e) {
+        console.warn(e);
+        setShowAlert(true);
+        setAlertText(`An unexpected error has occured`);
       }
     };
     const getTasks = async () => {
@@ -253,8 +256,10 @@ const Tasks = () => {
         setAlertType("danger");
         setAlertText(`${data.message}`);
       }
-    } catch {
-      console.log("error adding task to active tasks");
+    } catch (e) {
+      console.warn(e);
+      setShowAlert(true);
+      setAlertText(`An unexpected error has occured`);
     }
   };
 
@@ -314,9 +319,9 @@ const Tasks = () => {
           setAlertText(`${data.message}`);
           console.log(data);
         }
-      } catch {
+      } catch (e) {
+        console.warn(e);
         setShowAlert(true);
-        console.log("??");
         setAlertText(`An unexpected error has occured`);
       }
     }
@@ -375,7 +380,8 @@ const Tasks = () => {
           setAlertType("danger");
           setAlertText(`${data.message}`);
         }
-      } catch {
+      } catch (e) {
+        console.warn(e);
         setShowAlert(true);
         setAlertText(`An unexpected error has occured`);
       }
@@ -407,14 +413,12 @@ const Tasks = () => {
         setAlertType("success");
         setAlertText(`You just gained +${task.task_xp}XP`);
       } else {
-        console.log(`Error finishing task with id ${task.task_id}`);
         setShowAlert(true);
         setAlertType("danger");
         setAlertText(`${data.message}`);
       }
-    } catch {
-      console.log(`Error finishing task with id ${task.task_id}`);
-      console.log(tasks);
+    } catch (e) {
+      console.warn(e);
       setShowAlert(true);
       setAlertText(`An unexpected error has occured`);
     }

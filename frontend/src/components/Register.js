@@ -26,30 +26,30 @@ const Register = () => {
   const postRegisterInfo = async () => {
     if (!username) {
       setShowAlert(true);
-      setAlertText("Error: Username can't be empty");
+      setAlertText("Username can't be empty");
       return;
     }
     if (!name) {
       setShowAlert(true);
-      setAlertText("Error: Name can't be empty");
+      setAlertText("Name can't be empty");
       return;
     }
 
     if (!email) {
       setShowAlert(true);
-      setAlertText("Error: Email can't be empty");
+      setAlertText("Email can't be empty");
       return;
     }
 
     if (!password1 || !password2) {
       setShowAlert(true);
-      setAlertText("Error: Passwords can't be empty");
+      setAlertText("Passwords can't be empty");
       return;
     }
 
     if (password1 !== password2) {
       setShowAlert(true);
-      setAlertText("Error: Passwords must match");
+      setAlertText("Passwords must match");
       return;
     }
 
@@ -74,11 +74,12 @@ const Register = () => {
         history.push("/login");
       } else {
         setShowAlert(true);
-        setAlertText(`Error: ${data.message}`);
+        setAlertText(`${data.message}`);
       }
     } catch (e) {
+      console.warn(e);
       setShowAlert(true);
-      setAlertText(`An unknown error has occured. Please try again.`);
+      setAlertText(`An unexpected error has occured`);
     }
   };
   return (

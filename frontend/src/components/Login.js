@@ -23,12 +23,12 @@ const Login = () => {
   const postLoginInfo = async () => {
     if (!username) {
       setShowAlert(true);
-      setAlertText("Error: Username can't be empty");
+      setAlertText("Username can't be empty");
       return;
     }
     if (!password) {
       setShowAlert(true);
-      setAlertText("Error: Password can't be empty");
+      setAlertText("Password can't be empty");
       return;
     }
 
@@ -52,11 +52,12 @@ const Login = () => {
         history.push("/tasks");
       } else {
         setShowAlert(true);
-        setAlertText(`Error: ${data.message}`);
+        setAlertText(`${data.message}`);
       }
-    } catch {
+    } catch (e) {
+      console.warn(e);
       setShowAlert(true);
-      setAlertText("Invalid Credentials: Please check your username/password and try again.");
+      setAlertText("Invalid Credentials - Please check your username/password and try again");
     }
   };
   return (
