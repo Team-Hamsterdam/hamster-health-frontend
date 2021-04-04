@@ -81,14 +81,14 @@ const Hero = ({
             data-reveal-delay="800"
           >
             <a
-              data-video="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+              data-video="https://www.youtube.com/watch?v=tPwBvI1yCMg"
               href="#0"
               aria-controls="video-modal"
               onClick={openModal}
             >
               <Image
                 className="has-shadow"
-                src={require("./../../assets/images/video-placeholder.jpg")}
+                src={require("./../../assets/images/video-placeholder2.png")}
                 alt="Hero"
                 width={896}
                 height={504}
@@ -99,7 +99,7 @@ const Hero = ({
             id="video-modal"
             show={videoModalActive}
             handleClose={closeModal}
-            video="https://www.youtube.com/embed/dQw4w9WgXcQ"
+            video="https://www.youtube.com/embed/tPwBvI1yCMg"
             videoTag="iframe"
           />
         </div>
