@@ -15,7 +15,6 @@ const Tasks = () => {
     const [ourTasks, setOurTasks] = useState([]);
     const [customTasks, setCustomTasks] = useState([]);
     const [taskPreview, setTaskPreview] = useState(0);
-    const [tasksLength, setTasksLength] = useState(0);
     const [ourTasksBtn, setOurTasksBtn] = useState(false);
     const [customTasksBtn, setCustomTasksBtn] = useState(false);
     const [customTitle, setCustomTitle] = useState("");
@@ -42,148 +41,211 @@ const Tasks = () => {
                 console.log(tasks);
             }
         };
+        const fetchOurTasks = async () => {
+            try {
+                console.log("token is", token);
+                const res = await fetch(`${api}/task/getourtasks`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: token,
+                    },
+                });
+
+                const data = await res.json();
+
+                return data.tasks;
+            } catch {
+                console.log("Error getting tasks");
+                console.log(tasks);
+            }
+        };
+        const fetchCustomTasks = async () => {
+            try {
+                console.log("token is", token);
+                const res = await fetch(`${api}/task/getcustomtasks`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: token,
+                    },
+                });
+
+                const data = await res.json();
+
+                return data.tasks;
+            } catch {
+                console.log("Error getting tasks");
+                console.log(tasks);
+            }
+        };
         const getTasks = async () => {
-            setTasks([
-                {
-                    id: 1,
-                    title: "Run 5km",
-                    desc: "run 5km??1",
-                    xp: "20",
-                    is_custom: false,
-                },
-                {
-                    id: 2,
-                    title: "Sleep for 24 hours",
-                    desc: "run 5km??2",
-                    xp: "20",
-                    is_custom: false,
-                },
-                {
-                    id: 3,
-                    title: "Run 5000000km",
-                    desc: "run 5km??3",
-                    xp: "20",
-                    is_custom: false,
-                },
-                {
-                    id: 4,
-                    title: "Swim 500000000km",
-                    desc: "run 5km??4",
-                    xp: "20",
-                    is_custom: false,
-                },
-                {
-                    id: 5,
-                    title: "Run 5km",
-                    desc: "run 5km??5",
-                    xp: "20",
-                    is_custom: false,
-                },
-            ]);
-            setOurTasks([
-                {
-                    id: 1,
-                    title: "Sleep for 20 hours",
-                    desc: "run 5km??1",
-                    xp: "20",
-                    is_custom: false,
-                },
-                {
-                    id: 2,
-                    title: "Take a 20 minute nap",
-                    desc: "run 5km??1",
-                    xp: "20",
-                    is_custom: false,
-                },
-                {
-                    id: 3,
-                    title: "Eat a raw onion",
-                    desc: "run 5km??1",
-                    xp: "20",
-                    is_custom: false,
-                },
-                {
-                    id: 1,
-                    title: "Sleep for 20 hours",
-                    desc: "run 5km??1",
-                    xp: "20",
-                    is_custom: false,
-                },
-                {
-                    id: 2,
-                    title: "Take a 20 minute nap",
-                    desc: "run 5km??1",
-                    xp: "20",
-                    is_custom: false,
-                },
-                {
-                    id: 3,
-                    title: "Eat a raw onion",
-                    desc: "run 5km??1",
-                    xp: "20",
-                    is_custom: false,
-                },
-                {
-                    id: 1,
-                    title: "Sleep for 20 hours",
-                    desc: "run 5km??1",
-                    xp: "20",
-                    is_custom: false,
-                },
-                {
-                    id: 2,
-                    title: "Take a 20 minute nap",
-                    desc: "run 5km??1",
-                    xp: "20",
-                    is_custom: false,
-                },
-                {
-                    id: 3,
-                    title: "Eat a raw onion",
-                    desc: "run 5km??1",
-                    xp: "20",
-                    is_custom: false,
-                },
-                {
-                    id: 1,
-                    title: "Sleep for 20 hours",
-                    desc: "run 5km??1",
-                    xp: "20",
-                    is_custom: false,
-                },
-                {
-                    id: 2,
-                    title: "Take a 20 minute nap",
-                    desc: "run 5km??1",
-                    xp: "20",
-                    is_custom: false,
-                },
-                {
-                    id: 3,
-                    title: "Eat a raw onion",
-                    desc: "run 5km??1",
-                    xp: "20",
-                    is_custom: false,
-                },
-            ]);
-            // const tasksFromServer = await fetchTasks();
-            // setTasks(tasksFromServer);
-            setTasksLength(tasks.length);
+            // setTasks([
+            //     {
+            //         id: 1,
+            //         title: "Run 5km",
+            //         desc: "run 5km??1",
+            //         xp: "20",
+            //         is_custom: false,
+            //     },
+            //     {
+            //         id: 2,
+            //         title: "Sleep for 24 hours",
+            //         desc: "run 5km??2",
+            //         xp: "20",
+            //         is_custom: false,
+            //     },
+            //     {
+            //         id: 3,
+            //         title: "Run 5000000km",
+            //         desc: "run 5km??3",
+            //         xp: "20",
+            //         is_custom: false,
+            //     },
+            //     {
+            //         id: 4,
+            //         title: "Swim 500000000km",
+            //         desc: "run 5km??4",
+            //         xp: "20",
+            //         is_custom: false,
+            //     },
+            //     {
+            //         id: 5,
+            //         title: "Run 5km",
+            //         desc: "run 5km??5",
+            //         xp: "20",
+            //         is_custom: false,
+            //     },
+            // ]);
+            // setOurTasks([
+            //     {
+            //         id: 1,
+            //         title: "Sleep for 20 hours",
+            //         desc: "run 5km??1",
+            //         xp: "20",
+            //         is_custom: false,
+            //     },
+            //     {
+            //         id: 2,
+            //         title: "Take a 20 minute nap",
+            //         desc: "run 5km??1",
+            //         xp: "20",
+            //         is_custom: false,
+            //     },
+            //     {
+            //         id: 3,
+            //         title: "Eat a raw onion",
+            //         desc: "run 5km??1",
+            //         xp: "20",
+            //         is_custom: false,
+            //     },
+            //     {
+            //         id: 1,
+            //         title: "Sleep for 20 hours",
+            //         desc: "run 5km??1",
+            //         xp: "20",
+            //         is_custom: false,
+            //     },
+            //     {
+            //         id: 2,
+            //         title: "Take a 20 minute nap",
+            //         desc: "run 5km??1",
+            //         xp: "20",
+            //         is_custom: false,
+            //     },
+            //     {
+            //         id: 3,
+            //         title: "Eat a raw onion",
+            //         desc: "run 5km??1",
+            //         xp: "20",
+            //         is_custom: false,
+            //     },
+            //     {
+            //         id: 1,
+            //         title: "Sleep for 20 hours",
+            //         desc: "run 5km??1",
+            //         xp: "20",
+            //         is_custom: false,
+            //     },
+            //     {
+            //         id: 2,
+            //         title: "Take a 20 minute nap",
+            //         desc: "run 5km??1",
+            //         xp: "20",
+            //         is_custom: false,
+            //     },
+            //     {
+            //         id: 3,
+            //         title: "Eat a raw onion",
+            //         desc: "run 5km??1",
+            //         xp: "20",
+            //         is_custom: false,
+            //     },
+            //     {
+            //         id: 1,
+            //         title: "Sleep for 20 hours",
+            //         desc: "run 5km??1",
+            //         xp: "20",
+            //         is_custom: false,
+            //     },
+            //     {
+            //         id: 2,
+            //         title: "Take a 20 minute nap",
+            //         desc: "run 5km??1",
+            //         xp: "20",
+            //         is_custom: false,
+            //     },
+            //     {
+            //         id: 3,
+            //         title: "Eat a raw onion",
+            //         desc: "run 5km??1",
+            //         xp: "20",
+            //         is_custom: false,
+            //     },
+            // ]);
+            const tasksFromServer = await fetchTasks();
+            setTasks(tasksFromServer);
+            const ourTasksFromServer = await fetchOurTasks();
+            setOurTasks(ourTasksFromServer);
+            const customTasksFromServer = await fetchCustomTasks();
+            setCustomTasks(customTasksFromServer);
         };
         getTasks();
-    }, []);
+    }, [tasks]);
 
-    const removeTask = (id) => {
+    const removeTask = async (id, key) => {
         console.log(id);
+        const token = localStorage.getItem("token");
 
-        const newTasks = tasks;
-        newTasks.splice(id, 1);
-        setTasks(newTasks);
-        if (id === 0) {
-            handleTaskClick(-1);
+        try {
+            const body = {
+                task_id: id,
+            };
+            const res = await fetch(`${api}/task/removeactivetask`, {
+                method: "DELETE",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    Authorization: token,
+                },
+                body: JSON.stringify(body),
+            });
+
+            if (res.ok) {
+                console.log("task successfully added to active tasks");
+                const newTasks = tasks;
+                newTasks.splice(key, 1);
+                setTasks(newTasks);
+                if (key === 0) {
+                    handleTaskClick(-1);
+                }
+                handleTaskClick(key - 1);
+            } else {
+                console.log("error adding task to active tasks");
+            }
+        } catch {
+            console.log("error adding task to active tasks");
         }
-        handleTaskClick(id - 1);
-        console.log("task preview is ", taskPreview);
     };
 
     const handleOurTasksBtn = () => {
@@ -202,47 +264,122 @@ const Tasks = () => {
         setCustomTasksBtn(false);
     };
 
-    const addTask = (task) => {
+    const addTask = async (task) => {
+        const token = localStorage.getItem("token");
         console.log(tasks.length);
         setCustomTitle("");
         setCustomDesc("");
         if (tasks.length < max_tasks) {
             const newTask = {
-                id: tasks.length,
+                id: task.id,
                 title: task.title,
                 desc: task.desc,
                 xp: "20",
                 is_custom: false,
             };
             setTasks([...tasks, newTask]);
+
+            try {
+                const body = {
+                    task_id: task.id,
+                };
+                const res = await fetch(`${api}/task/addactivetask`, {
+                    method: "POST",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                        Authorization: token,
+                    },
+                    body: JSON.stringify(body),
+                });
+
+                if (res.ok) {
+                    console.log("task successfully added to active tasks");
+                } else {
+                    console.log("error adding task to active tasks");
+                }
+            } catch {
+                console.log("error adding task to active tasks");
+            }
         }
         if (tasks.length === max_tasks - 1) {
             handleTaskClick(tasks.length);
         }
     };
 
-    const handleAddCustomTask = () => {
+    const handleAddCustomTask = async () => {
         if (customTitle.length > 0) {
-            const newTask = {
-                id: tasks.length,
-                title: customTitle,
-                desc: customDesc,
-                xp: "20",
-                is_custom: false,
-            };
+            const token = localStorage.getItem("token");
+            try {
+                const body = {
+                    title: customTitle,
+                    description: customDesc,
+                };
 
-            const includes = customTasks.some((task) => {
-                return (
-                    task.title === newTask.title && task.desc === newTask.desc
-                );
+                const res = await fetch(`${api}/task/create`, {
+                    method: "POST",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                        Authorization: token,
+                    },
+                    body: JSON.stringify(body),
+                });
+                const data = await res.json();
+
+                if (res.ok) {
+                    const newTask = {
+                        id: data.task_id,
+                        title: customTitle,
+                        desc: customDesc,
+                        xp: 5,
+                        is_custom: true,
+                    };
+                    const includes = customTasks.some((task) => {
+                        return (
+                            task.title === newTask.title &&
+                            task.desc === newTask.desc
+                        );
+                    });
+
+                    // client side
+                    if (!includes) {
+                        setCustomTasks([...customTasks, newTask]);
+                        console.log("added new task", newTask);
+                    } else {
+                        console.log("task already exists");
+                    }
+                }
+            } catch {
+                console.log("Failed adding custom task");
+            }
+        }
+    };
+
+    const handleFinishTask = async (id, key) => {
+        const token = localStorage.getItem("token");
+        try {
+            console.log("token is", token);
+            const body = {
+                task_id: id,
+            };
+            const res = await fetch(`${api}/task/finish`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: token,
+                },
+                body: JSON.stringify(body),
             });
 
-            if (!includes) {
-                setCustomTasks([...customTasks, newTask]);
-                console.log("added new task", newTask);
+            if (res.ok) {
+                removeTask(key);
             } else {
-                console.log("task already exists");
+                console.log(`Error finishing task with id ${id}`);
             }
+        } catch {
+            console.log(`Error finishing task with id ${id}`);
+            console.log(tasks);
         }
     };
 
@@ -290,7 +427,7 @@ const Tasks = () => {
                             ))}
                         <Row md={12}>
                             <Col>
-                                {tasks.length < max_tasks ? (
+                                {tasks && tasks.length < max_tasks ? (
                                     <>
                                         <Row md={12}>
                                             <Col md={6} className="w-50">
@@ -384,10 +521,10 @@ const Tasks = () => {
                                             </Row>
                                         ))) ||
                                     (tasks &&
-                                        tasks.map((task, id) => {
-                                            if (id === taskPreview) {
+                                        tasks.map((task, key) => {
+                                            if (key === taskPreview) {
                                                 return (
-                                                    <React.Fragment key={id}>
+                                                    <React.Fragment key={key}>
                                                         <Row
                                                             md={12}
                                                             id="task-title"
@@ -404,7 +541,7 @@ const Tasks = () => {
                                                             <p className="px-2 py-2">
                                                                 {task.desc}{" "}
                                                                 actual id is{" "}
-                                                                {id}
+                                                                {key}
                                                             </p>
                                                         </Row>
                                                         <Row md={12}>
@@ -419,6 +556,12 @@ const Tasks = () => {
                                                                     style={{
                                                                         backgroundColor:
                                                                             "#31278E",
+                                                                    }}
+                                                                    onClick={() => {
+                                                                        handleFinishTask(
+                                                                            task.id,
+                                                                            key
+                                                                        );
                                                                     }}
                                                                 >
                                                                     Mark as
@@ -436,7 +579,8 @@ const Tasks = () => {
                                                                     className="w-100 mx-0"
                                                                     onClick={() =>
                                                                         removeTask(
-                                                                            id
+                                                                            task.id,
+                                                                            key
                                                                         )
                                                                     }
                                                                     style={{
