@@ -1,1 +1,1 @@
-export const api = "http://localhost:4500";
+export const api = "https://hackiethon-backend.herokuapp.com/";
