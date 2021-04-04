@@ -8,6 +8,7 @@ import Form from "react-bootstrap/Form";
 import Navbar1 from "./Navbar1";
 import CustomTasks from "./CustomTasks";
 import { api } from "./Api";
+import CreateAlert from "./CreateAlert";
 
 const Tasks = () => {
   const [tasks, setTasks] = useState([]);
@@ -18,6 +19,10 @@ const Tasks = () => {
   const [customTasksBtn, setCustomTasksBtn] = useState(false);
   const [customTitle, setCustomTitle] = useState("");
   const [customDesc, setCustomDesc] = useState("");
+  const [alertText, setAlertText] = useState("");
+  const [alertType, setAlertType] = useState("danger");
+  const [showAlert, setShowAlert] = useState(false);
+  const max_custom_tasks = 8;
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -230,6 +235,7 @@ const Tasks = () => {
         },
         body: JSON.stringify(body),
       });
+      const data = await res.json();
 
       if (res.ok) {
         console.log("task successfully added to active tasks");
@@ -243,7 +249,9 @@ const Tasks = () => {
         }
         handleTaskClick(index - 1);
       } else {
-        console.log("error adding task to active tasks");
+        setShowAlert(true);
+        setAlertType("danger");
+        setAlertText(`${data.message}`);
       }
     } catch {
       console.log("error adding task to active tasks");
@@ -288,6 +296,8 @@ const Tasks = () => {
           },
           body: JSON.stringify(body),
         });
+
+        const data = await res.json();
         if (res.ok) {
           console.log("task successfully added to active tasks");
           const newTask = {
@@ -299,10 +309,15 @@ const Tasks = () => {
           };
           setTasks([...tasks, newTask]);
         } else {
-          console.log("error adding task to active task XD");
+          setShowAlert(true);
+          setAlertType("danger");
+          setAlertText(`${data.message}`);
+          console.log(data);
         }
       } catch {
-        console.log("error adding task to active tasks");
+        setShowAlert(true);
+        console.log("??");
+        setAlertText(`An unexpected error has occured`);
       }
     }
     if (tasks.length === max_tasks - 1) {
@@ -311,6 +326,12 @@ const Tasks = () => {
   };
 
   const handleAddCustomTask = async () => {
+    if (customTasks.length >= max_custom_tasks) {
+      setShowAlert(true);
+      setAlertType("danger");
+      setAlertText(`Sorry, you can't have more than ${max_custom_tasks} tasks.`);
+      return;
+    }
     if (customTitle.length > 0) {
       const token = localStorage.getItem("token");
       try {
@@ -345,21 +366,29 @@ const Tasks = () => {
           // client side
           if (!includes) {
             setCustomTasks([...customTasks, newTask]);
-            console.log("added new task", newTask);
           } else {
-            console.log("task already exists");
+            setShowAlert(true);
+            setAlertText(`You already have this task!`);
           }
+        } else {
+          setShowAlert(true);
+          setAlertType("danger");
+          setAlertText(`${data.message}`);
         }
       } catch {
-        console.log("Failed adding custom task");
+        setShowAlert(true);
+        setAlertText(`An unexpected error has occured`);
       }
+    } else {
+      setShowAlert(true);
+      setAlertType("danger");
+      setAlertText(`Your new task title can't be empty!`);
     }
   };
 
   const handleFinishTask = async (task) => {
     const token = localStorage.getItem("token");
     try {
-      console.log("token is", token);
       const body = {
         task_id: task.task_id,
       };
@@ -371,15 +400,23 @@ const Tasks = () => {
         },
         body: JSON.stringify(body),
       });
-
+      const data = await res.json();
       if (res.ok) {
         removeTask(task);
+        setShowAlert(true);
+        setAlertType("success");
+        setAlertText(`You just gained +${task.task_xp}XP`);
       } else {
         console.log(`Error finishing task with id ${task.task_id}`);
+        setShowAlert(true);
+        setAlertType("danger");
+        setAlertText(`${data.message}`);
       }
     } catch {
       console.log(`Error finishing task with id ${task.task_id}`);
       console.log(tasks);
+      setShowAlert(true);
+      setAlertText(`An unexpected error has occured`);
     }
   };
 
@@ -418,6 +455,7 @@ const Tasks = () => {
                   </Col>
                 </Row>
               ))}
+
             <Row md={12}>
               <Col>
                 {tasks && tasks.length < max_tasks ? (
@@ -458,6 +496,13 @@ const Tasks = () => {
                 ) : (
                   ""
                 )}
+                <CreateAlert
+                  text={alertText}
+                  type={alertType}
+                  show={showAlert}
+                  setShow={setShowAlert}
+                  classes="task-alert"
+                />
               </Col>
             </Row>
           </Col>
@@ -483,6 +528,14 @@ const Tasks = () => {
                     setCustomDesc={setCustomDesc}
                     handleAddCustomTask={handleAddCustomTask}
                     addTask={addTask}
+                    show={false}
+                    setShow={setShowAlert}
+                    type={alertType}
+                    text={alertText}
+                    setCustomTasks={setCustomTasks}
+                    setShowAlert={setShowAlert}
+                    setAlertType={setAlertType}
+                    setAlertText={setAlertText}
                   />
                 )) ||
                   (ourTasksBtn &&

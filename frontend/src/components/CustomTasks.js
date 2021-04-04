@@ -4,16 +4,56 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import CreateAlert from "./CreateAlert";
 import Form from "react-bootstrap/Form";
+import { api } from "./Api";
 const CustomTasks = ({
   customTasks,
   setCustomTitle,
   setCustomDesc,
   handleAddCustomTask,
   addTask,
+  setShow,
+  type,
+  text,
+  show,
+  setCustomTasks,
+  setShowAlert,
+  setAlertType,
+  setAlertText,
 }) => {
-  const [alertText, setAlertText] = useState("");
-  const [alertType, setAlertType] = useState("danger");
-  const [showAlert, setShowAlert] = useState(false);
+  const removeCustomTask = async (task) => {
+    const token = localStorage.getItem("token");
+
+    try {
+      const body = {
+        task_id: task.task_id,
+      };
+      const res = await fetch(`${api}/task/remove`, {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+        body: JSON.stringify(body),
+      });
+      const data = await res.json();
+
+      if (res.ok) {
+        const newTasks = customTasks;
+        const index = customTasks.map((e) => e.task_id).indexOf(task.task_id);
+        newTasks.splice(index, 1);
+        setCustomTasks([...newTasks]);
+      } else {
+        setShowAlert(true);
+        setAlertType("danger");
+        setAlertText(`${data.message}`);
+      }
+    } catch (e) {
+      setShowAlert(true);
+      console.warn(e);
+      setAlertText(`An unexpected error has occured`);
+    }
+  };
   return (
     <>
       <Form>
@@ -66,14 +106,14 @@ const CustomTasks = ({
         </Row>
       </Form>
       <>
-        <CreateAlert text={alertText} type={alertType} show={showAlert} setShow={setShowAlert} />
-        <h4 className="mb-1">Your Custom Tasks</h4>
+        <CreateAlert text={text} type={type} show={show} setShow={setShow} />
+        <h4 className="mb-1">Your Tasks</h4>
         {customTasks &&
           customTasks.map((customTask, id) => (
             <Row key={id} md={12}>
-              <Col className="rounded py-2 w-100" md={12}>
+              <Col className="rounded py-2" md={12}>
                 <Button
-                  className="w-100 mx-0 text-left overflow-hidden"
+                  className="custom-task-btn mx-0 text-left overflow-hidden"
                   variant="dark"
                   id="task-button2"
                   onClick={() => {
@@ -83,7 +123,19 @@ const CustomTasks = ({
                     backgroundColor: "#ff8600ff",
                   }}
                 >
-                  {customTask.title} - {customTask.description}
+                  <span>
+                    {customTask.title} {customTask.description.length > 0 ? "- " : ""}
+                    {customTask.description}
+                  </span>
+                </Button>
+                <Button
+                  onClick={() => {
+                    removeCustomTask(customTask);
+                  }}
+                  className="task-close mx-0 text-left overflow-hidden"
+                  aria-hidden="true"
+                >
+                  <span>&times;</span>
                 </Button>
               </Col>
             </Row>

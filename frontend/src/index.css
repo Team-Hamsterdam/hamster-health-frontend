@@ -116,7 +116,7 @@ a:hover {
 
 
 #task-button2 {
-
+  height: 45px;
   outline: none !important;
   border: none;
 }
@@ -165,4 +165,19 @@ a:hover {
 
 .h2-size {
   font-size: 32px !important;
+}
+
+.task-alert {
+  font-size: 14pt;
+}
+
+.task-close {
+  float: right;
+  width: 45px;
+  height: 45px;
+  border-color: #4E52BE !important;
+}
+
+.custom-task-btn {
+  width: 90%;
 }
