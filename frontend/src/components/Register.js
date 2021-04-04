@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
@@ -7,15 +7,18 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Header from "./layout/Header";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
-const Register = ({ api }) => {
+import { api } from "./Api";
+
+const Register = () => {
     const [username, setUsername] = useState("");
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password1, setPassword1] = useState("");
     const [password2, setPassword2] = useState("");
-
+    const history = useHistory();
+    console.log(api);
     const postRegisterInfo = async () => {
         if (!username) {
             console.log("username can't be empty");
@@ -47,18 +50,23 @@ const Register = ({ api }) => {
             email: email,
             name: name,
         };
-        console.log(api);
-        const res = await fetch(`${api}/auth/login`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(body),
-        });
 
-        if (!res.ok) {
-            const message = `An error has occured: ${res.status}`;
-            throw new Error(message);
-        } else {
-            this.props.history.push("/login");
+        try {
+            const res = await fetch(`${api}/auth/register`, {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(body),
+            });
+            if (res.ok) {
+                history.push("/login");
+            } else {
+                console.log("Failed to register");
+            }
+        } catch {
+            console.log("Failed to register");
         }
     };
     return (

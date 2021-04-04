@@ -1,16 +1,17 @@
-import React, { Component } from "react";
+import React from "react";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import Nav from "react-bootstrap/Nav";
 import Image from "react-bootstrap/Image";
 import logo from "../logo.png";
 import Row from "react-bootstrap/Row";
+import { Link, NavLink } from "react-router-dom";
 
 const Navbar1 = () => {
     return (
         <Navbar collapseOnSelect expand="lg" bg="#27187eff" variant="dark">
             <Navbar.Brand
-                href="/tasks"
+                as={Link}
+                to="/tasks"
                 className="mr-auto"
                 style={{ fontSize: 45 }}
             >
@@ -23,7 +24,7 @@ const Navbar1 = () => {
                         src={logo}
                         className="d-inline-block align-top"
                     />{" "}
-                    <span class="text-color-secondary">Hamster</span> Health
+                    <span className="text-color-secondary">Hamster</span> Health
                 </Row>
             </Navbar.Brand>
 
@@ -34,20 +35,31 @@ const Navbar1 = () => {
                     className="ml-auto"
                     defaultActiveKey="/tasks"
                 >
-                    <Nav.Link href="/tasks" className="mx-2">
+                    <Nav.Link as={NavLink} to="/tasks" className="mx-2">
                         Task
                     </Nav.Link>
-                    <Nav.Link className="mx-2" href="/progress">
+                    <Nav.Link as={NavLink} className="mx-2" to="/progress">
                         Progress
                     </Nav.Link>
-                    <Nav.Link className="mx-2" href="/leaderboard">
+                    <Nav.Link as={NavLink} className="mx-2" to="/leaderboard">
                         Leaderboard
                     </Nav.Link>
-                    <Nav.Link className="mx-2" href="/profile">
+                    <Nav.Link as={NavLink} className="mx-2" to="/profile">
                         Profile
                     </Nav.Link>
-                    <Nav.Link className="mx-2" href="/rank">
+                    <Nav.Link as={NavLink} className="mx-2" to="/rank">
                         Rank
+                    </Nav.Link>
+                    <Nav.Link
+                        as={NavLink}
+                        className="mx-2"
+                        exact
+                        to="/"
+                        onClick={() => {
+                            localStorage.removeItem("token");
+                        }}
+                    >
+                        Sign Out
                     </Nav.Link>
                 </Nav>
             </Navbar.Collapse>
