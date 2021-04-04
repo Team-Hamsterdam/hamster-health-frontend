@@ -4,11 +4,11 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 const CustomTasks = ({
-    customTasks,
-    setCustomTitle,
-    setCustomDesc,
-    handleAddCustomTask,
-    addTask,
+  customTasks,
+  setCustomTitle,
+  setCustomDesc,
+  handleAddCustomTask,
+  addTask,
 }) => {
     return (
         <>
