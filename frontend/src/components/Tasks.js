@@ -34,7 +34,6 @@ const Tasks = () => {
                 });
 
                 const data = await res.json();
-
                 return data.tasks;
             } catch {
                 console.log("Error getting tasks");
