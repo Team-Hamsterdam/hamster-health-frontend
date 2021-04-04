@@ -8,7 +8,6 @@ import Tasks from "./components/Tasks";
 import Profile from "./components/Profile";
 import Leaderboard from "./components/Leaderboard";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import PrivateRoute from "./components/PrivateRoute";
 
 // Layouts
 import LayoutDefault from "./layouts/LayoutDefault";
@@ -32,9 +31,9 @@ function App() {
         <Route path="/register" render={(props) => <Register />} />
         <Route path="/login" render={(props) => <Login />} />
 
-        <PrivateRoute path="/tasks" component={Tasks} />
-        <PrivateRoute path="/profile" component={Profile} />
-        <PrivateRoute path="/leaderboard" component={Leaderboard} />
+        <Route path="/tasks" component={Tasks} />
+        <Route path="/profile" component={Profile} />
+        <Route path="/leaderboard" component={Leaderboard} />
       </Router>
     </React.Fragment>
   );
