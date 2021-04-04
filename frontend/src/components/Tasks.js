@@ -6,6 +6,7 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Navbar1 from "./Navbar1";
+import CustomTasks from "./CustomTasks";
 
 const Tasks = () => {
     const api = "http://localhost:4000";
@@ -230,7 +231,7 @@ const Tasks = () => {
 
     const handleAddCustomTask = () => {
         console.log("added new task");
-        if (customTitle.length > 0 && customDesc.length > 0) {
+        if (customTitle.length > 0) {
             const newTask = {
                 id: tasks.length,
                 title: customTitle,
@@ -323,21 +324,6 @@ const Tasks = () => {
                                                 </Button>
                                             </Col>
                                         </Row>
-                                        <Row md={12}>
-                                            <Button
-                                                className="w-100 my-1"
-                                                variant="dark"
-                                                id="task-button2"
-                                                onClick={() => {
-                                                    handleCreateBtn();
-                                                }}
-                                                style={{
-                                                    backgroundColor: "#31278E",
-                                                }}
-                                            >
-                                                Create New Task
-                                            </Button>
-                                        </Row>
                                     </>
                                 ) : (
                                     ""
@@ -421,30 +407,17 @@ const Tasks = () => {
                                         </Row>
                                     </Form>
                                 )) ||
-                                    (customTasksBtn &&
-                                        customTasks.map((customTask, id) => (
-                                            <Row key={id} md={12}>
-                                                <Col
-                                                    className="rounded py-2 w-100 text-center"
-                                                    md={12}
-                                                >
-                                                    <Button
-                                                        className="w-100 mx-0"
-                                                        variant="dark"
-                                                        id="task-button2"
-                                                        onClick={() => {
-                                                            addTask(customTask);
-                                                        }}
-                                                        style={{
-                                                            backgroundColor:
-                                                                "#ff8600ff",
-                                                        }}
-                                                    >
-                                                        {customTask.title}
-                                                    </Button>
-                                                </Col>
-                                            </Row>
-                                        ))) ||
+                                    (customTasksBtn && (
+                                        <CustomTasks
+                                            customTasks={customTasks}
+                                            setCustomTitle={setCustomTitle}
+                                            setCustomDesc={setCustomDesc}
+                                            handleAddCustomTask={
+                                                handleAddCustomTask
+                                            }
+                                            addTask={addTask}
+                                        />
+                                    )) ||
                                     (ourTasksBtn &&
                                         ourTasks.map((ourTask, id) => (
                                             <Row key={id} md={12}>
