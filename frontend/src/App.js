@@ -5,6 +5,7 @@ import "./index.css";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Tasks from "./components/Tasks";
+import Profile from "./components/Profile";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 
@@ -34,7 +35,9 @@ function App() {
 
                 <Route path="/register" render={(props) => <Register />} />
                 <Route path="/login" render={(props) => <Login />} />
+
                 <PrivateRoute path="/tasks" component={Tasks} />
+                <PrivateRoute path="/profile" component={Profile} />
             </Router>
         </React.Fragment>
     );

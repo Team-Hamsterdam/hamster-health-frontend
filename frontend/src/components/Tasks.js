@@ -203,11 +203,14 @@ const Tasks = () => {
             //     },
             // ]);
             const tasksFromServer = await fetchTasks();
-            setTasks(tasksFromServer);
+            if (tasksFromServer) setTasks(tasksFromServer);
+
             const ourTasksFromServer = await fetchOurTasks();
-            setOurTasks(ourTasksFromServer);
+
+            if (ourTasksFromServer) setOurTasks(ourTasksFromServer);
+
             const customTasksFromServer = await fetchCustomTasks();
-            setCustomTasks(customTasksFromServer);
+            if (customTasksFromServer) setCustomTasks(customTasksFromServer);
         };
         getTasks();
     }, [tasks]);

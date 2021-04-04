@@ -24,6 +24,11 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         } catch {
             console.log("Failed checking");
         }
+
+        if (token != null) {
+            return true;
+        }
+        return false;
     };
 
     return (
