@@ -7,10 +7,10 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Navbar1 from "./Navbar1";
 import CustomTasks from "./CustomTasks";
+import { api } from "./Api";
+import CreateAlert from "./CreateAlert";
 
 const Tasks = () => {
-  const api = "http://localhost:4000";
-
   const [tasks, setTasks] = useState([]);
   const [ourTasks, setOurTasks] = useState([]);
   const [customTasks, setCustomTasks] = useState([]);
@@ -19,12 +19,15 @@ const Tasks = () => {
   const [customTasksBtn, setCustomTasksBtn] = useState(false);
   const [customTitle, setCustomTitle] = useState("");
   const [customDesc, setCustomDesc] = useState("");
+  const [alertText, setAlertText] = useState("");
+  const [alertType, setAlertType] = useState("danger");
+  const [showAlert, setShowAlert] = useState(false);
+  const max_custom_tasks = 8;
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    const fetchTasks = async () => {
+    const fetchActiveTasks = async () => {
       try {
-        console.log("token is", token);
         const res = await fetch(`${api}/task/gettasks`, {
           method: "GET",
           headers: {
@@ -35,14 +38,14 @@ const Tasks = () => {
 
         const data = await res.json();
         return data.tasks;
-      } catch {
-        console.log("Error getting tasks");
-        console.log(tasks);
+      } catch (e) {
+        console.warn(e);
+        setShowAlert(true);
+        setAlertText(`An unexpected error has occured`);
       }
     };
     const fetchOurTasks = async () => {
       try {
-        console.log("token is", token);
         const res = await fetch(`${api}/task/getourtasks`, {
           method: "GET",
           headers: {
@@ -54,14 +57,14 @@ const Tasks = () => {
         const data = await res.json();
 
         return data.tasks;
-      } catch {
-        console.log("Error getting tasks");
-        console.log(tasks);
+      } catch (e) {
+        console.warn(e);
+        setShowAlert(true);
+        setAlertText(`An unexpected error has occured`);
       }
     };
     const fetchCustomTasks = async () => {
       try {
-        console.log("token is", token);
         const res = await fetch(`${api}/task/getcustomtasks`, {
           method: "GET",
           headers: {
@@ -73,9 +76,10 @@ const Tasks = () => {
         const data = await res.json();
 
         return data.tasks;
-      } catch {
-        console.log("Error getting tasks");
-        console.log(tasks);
+      } catch (e) {
+        console.warn(e);
+        setShowAlert(true);
+        setAlertText(`An unexpected error has occured`);
       }
     };
     const getTasks = async () => {
@@ -202,25 +206,28 @@ const Tasks = () => {
       //         is_custom: false,
       //     },
       // ]);
-      const tasksFromServer = await fetchTasks();
+      const tasksFromServer = await fetchActiveTasks();
       if (tasksFromServer) setTasks(tasksFromServer);
+      console.log("active tasks", tasksFromServer);
 
       const ourTasksFromServer = await fetchOurTasks();
       if (ourTasksFromServer) setOurTasks(ourTasksFromServer);
+      console.log("our tasks", ourTasksFromServer);
 
       const customTasksFromServer = await fetchCustomTasks();
       if (customTasksFromServer) setCustomTasks(customTasksFromServer);
+      console.log("custom tasks", customTasksFromServer);
     };
     getTasks();
-  }, [tasks]);
+  }, []);
 
-  const removeTask = async (id, key) => {
-    console.log(id);
+  const removeTask = async (task) => {
+    console.log("about to remove task with task id ", task.task_id);
     const token = localStorage.getItem("token");
 
     try {
       const body = {
-        task_id: id,
+        task_id: task.task_id,
       };
       const res = await fetch(`${api}/task/removeactivetask`, {
         method: "DELETE",
@@ -231,21 +238,28 @@ const Tasks = () => {
         },
         body: JSON.stringify(body),
       });
+      const data = await res.json();
 
       if (res.ok) {
         console.log("task successfully added to active tasks");
         const newTasks = tasks;
-        newTasks.splice(key, 1);
+        const index = tasks.map((e) => e.task_id).indexOf(task.task_id);
+
+        newTasks.splice(index, 1);
         setTasks(newTasks);
-        if (key === 0) {
+        if (index === 0) {
           handleTaskClick(-1);
         }
-        handleTaskClick(key - 1);
+        handleTaskClick(index - 1);
       } else {
-        console.log("error adding task to active tasks");
+        setShowAlert(true);
+        setAlertType("danger");
+        setAlertText(`${data.message}`);
       }
-    } catch {
-      console.log("error adding task to active tasks");
+    } catch (e) {
+      console.warn(e);
+      setShowAlert(true);
+      setAlertText(`An unexpected error has occured`);
     }
   };
 
@@ -271,19 +285,13 @@ const Tasks = () => {
     setCustomTitle("");
     setCustomDesc("");
     if (tasks.length < max_tasks) {
-      const newTask = {
-        id: task.id,
-        title: task.title,
-        desc: task.desc,
-        xp: "20",
-        is_custom: false,
-      };
-      setTasks([...tasks, newTask]);
-
       try {
         const body = {
-          task_id: task.id,
+          task_id: task.task_id,
         };
+        console.log("XXXXXXXXXXXXXXXX");
+        console.log(task);
+        console.log(body);
         const res = await fetch(`${api}/task/addactivetask`, {
           method: "POST",
           headers: {
@@ -294,13 +302,27 @@ const Tasks = () => {
           body: JSON.stringify(body),
         });
 
+        const data = await res.json();
         if (res.ok) {
           console.log("task successfully added to active tasks");
+          const newTask = {
+            task_id: task.task_id,
+            title: task.title,
+            description: task.description,
+            task_xp: task.task_xp,
+            is_custom: false,
+          };
+          setTasks([...tasks, newTask]);
         } else {
-          console.log("error adding task to active tasks");
+          setShowAlert(true);
+          setAlertType("danger");
+          setAlertText(`${data.message}`);
+          console.log(data);
         }
-      } catch {
-        console.log("error adding task to active tasks");
+      } catch (e) {
+        console.warn(e);
+        setShowAlert(true);
+        setAlertText(`An unexpected error has occured`);
       }
     }
     if (tasks.length === max_tasks - 1) {
@@ -309,6 +331,12 @@ const Tasks = () => {
   };
 
   const handleAddCustomTask = async () => {
+    if (customTasks.length >= max_custom_tasks) {
+      setShowAlert(true);
+      setAlertType("danger");
+      setAlertText(`Sorry, you can't have more than ${max_custom_tasks} tasks.`);
+      return;
+    }
     if (customTitle.length > 0) {
       const token = localStorage.getItem("token");
       try {
@@ -330,36 +358,45 @@ const Tasks = () => {
 
         if (res.ok) {
           const newTask = {
-            id: data.task_id,
+            task_id: data.task_id,
             title: customTitle,
-            desc: customDesc,
-            xp: 5,
-            is_custom: true,
+            description: customDesc,
+            task_xp: 5,
+            is_custom: 1,
           };
           const includes = customTasks.some((task) => {
-            return task.title === newTask.title && task.desc === newTask.desc;
+            return task.title === newTask.title && task.description === newTask.description;
           });
 
           // client side
           if (!includes) {
             setCustomTasks([...customTasks, newTask]);
-            console.log("added new task", newTask);
           } else {
-            console.log("task already exists");
+            setShowAlert(true);
+            setAlertText(`You already have this task!`);
           }
+        } else {
+          setShowAlert(true);
+          setAlertType("danger");
+          setAlertText(`${data.message}`);
         }
-      } catch {
-        console.log("Failed adding custom task");
+      } catch (e) {
+        console.warn(e);
+        setShowAlert(true);
+        setAlertText(`An unexpected error has occured`);
       }
+    } else {
+      setShowAlert(true);
+      setAlertType("danger");
+      setAlertText(`Your new task title can't be empty!`);
     }
   };
 
-  const handleFinishTask = async (id, key) => {
+  const handleFinishTask = async (task) => {
     const token = localStorage.getItem("token");
     try {
-      console.log("token is", token);
       const body = {
-        task_id: id,
+        task_id: task.task_id,
       };
       const res = await fetch(`${api}/task/finish`, {
         method: "PUT",
@@ -369,15 +406,21 @@ const Tasks = () => {
         },
         body: JSON.stringify(body),
       });
-
+      const data = await res.json();
       if (res.ok) {
-        removeTask(key);
+        removeTask(task);
+        setShowAlert(true);
+        setAlertType("success");
+        setAlertText(`You just gained +${task.task_xp}XP`);
       } else {
-        console.log(`Error finishing task with id ${id}`);
+        setShowAlert(true);
+        setAlertType("danger");
+        setAlertText(`${data.message}`);
       }
-    } catch {
-      console.log(`Error finishing task with id ${id}`);
-      console.log(tasks);
+    } catch (e) {
+      console.warn(e);
+      setShowAlert(true);
+      setAlertText(`An unexpected error has occured`);
     }
   };
 
@@ -416,6 +459,7 @@ const Tasks = () => {
                   </Col>
                 </Row>
               ))}
+
             <Row md={12}>
               <Col>
                 {tasks && tasks.length < max_tasks ? (
@@ -456,6 +500,13 @@ const Tasks = () => {
                 ) : (
                   ""
                 )}
+                <CreateAlert
+                  text={alertText}
+                  type={alertType}
+                  show={showAlert}
+                  setShow={setShowAlert}
+                  classes="task-alert"
+                />
               </Col>
             </Row>
           </Col>
@@ -481,6 +532,14 @@ const Tasks = () => {
                     setCustomDesc={setCustomDesc}
                     handleAddCustomTask={handleAddCustomTask}
                     addTask={addTask}
+                    show={false}
+                    setShow={setShowAlert}
+                    type={alertType}
+                    text={alertText}
+                    setCustomTasks={setCustomTasks}
+                    setShowAlert={setShowAlert}
+                    setAlertType={setAlertType}
+                    setAlertText={setAlertText}
                   />
                 )) ||
                   (ourTasksBtn &&
@@ -519,7 +578,7 @@ const Tasks = () => {
                             </Row>
                             <Row md={12}>
                               <p className="px-2 py-2">
-                                {task.desc} actual id is {key}
+                                {task.description} actual id is {key}
                               </p>
                             </Row>
                             <Row md={12}>
@@ -532,11 +591,11 @@ const Tasks = () => {
                                     backgroundColor: "#31278E",
                                   }}
                                   onClick={() => {
-                                    handleFinishTask(task.id, key);
+                                    handleFinishTask(task);
                                   }}
                                 >
                                   Mark as finished (+
-                                  {task.xp}XP)
+                                  {task.task_xp}XP)
                                 </Button>
                               </Col>
                               <Col md={6} className="px-2">
@@ -544,7 +603,7 @@ const Tasks = () => {
                                   variant="dark"
                                   id="task-button2"
                                   className="w-100 mx-0"
-                                  onClick={() => removeTask(task.id, key)}
+                                  onClick={() => removeTask(task)}
                                   style={{
                                     backgroundColor: "#31278E",
                                   }}

@@ -27,19 +27,13 @@ const Navbar1 = () => {
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav variant="pills" className="ml-auto" defaultActiveKey="/tasks">
           <Nav.Link as={NavLink} to="/tasks" className="mx-2">
-            Task
-          </Nav.Link>
-          <Nav.Link as={NavLink} className="mx-2" to="/progress">
-            Progress
+            Tasks
           </Nav.Link>
           <Nav.Link as={NavLink} className="mx-2" to="/leaderboard">
             Leaderboard
           </Nav.Link>
           <Nav.Link as={NavLink} className="mx-2" to="/profile">
             Profile
-          </Nav.Link>
-          <Nav.Link as={NavLink} className="mx-2" to="/rank">
-            Rank
           </Nav.Link>
           <Nav.Link
             as={NavLink}

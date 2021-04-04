@@ -17,32 +17,27 @@ import LayoutDefault from "./layouts/LayoutDefault";
 import Home from "./views/Home";
 
 function App() {
-    let location = useLocation();
+  let location = useLocation();
 
-    useEffect(() => {
-        document.body.classList.add("is-loaded");
-    }, [location]);
+  useEffect(() => {
+    document.body.classList.add("is-loaded");
+  }, [location]);
 
-    document.getElementById("root").classList.add("background1");
-    return (
-        <React.Fragment>
-            <Router>
-                <AppRoute
-                    exact
-                    path="/"
-                    component={Home}
-                    layout={LayoutDefault}
-                />
+  document.getElementById("root").classList.add("background1");
+  return (
+    <React.Fragment>
+      <Router>
+        <AppRoute exact path="/" component={Home} layout={LayoutDefault} />
 
-                <Route path="/register" render={(props) => <Register />} />
-                <Route path="/login" render={(props) => <Login />} />
+        <Route path="/register" render={(props) => <Register />} />
+        <Route path="/login" render={(props) => <Login />} />
 
-                <PrivateRoute path="/tasks" component={Tasks} />
-                <PrivateRoute path="/profile" component={Profile} />
-                <PrivateRoute path="/leaderboard" component={Leaderboard} />
-            </Router>
-        </React.Fragment>
-    );
+        <PrivateRoute path="/tasks" component={Tasks} />
+        <PrivateRoute path="/profile" component={Profile} />
+        <PrivateRoute path="/leaderboard" component={Leaderboard} />
+      </Router>
+    </React.Fragment>
+  );
 }
 
 export default App;

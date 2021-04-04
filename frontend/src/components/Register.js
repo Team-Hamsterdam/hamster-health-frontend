@@ -6,6 +6,7 @@ import logo from "../logo.png";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import CreateAlert from "./CreateAlert";
 import Header from "./layout/Header";
 import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
@@ -17,30 +18,38 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
+  const [alertText, setAlertText] = useState("");
+  const [alertType, setAlertType] = useState("danger");
+  const [showAlert, setShowAlert] = useState(false);
   const history = useHistory();
-  console.log(api);
+
   const postRegisterInfo = async () => {
     if (!username) {
-      console.log("username can't be empty");
+      setShowAlert(true);
+      setAlertText("Username can't be empty");
       return;
     }
     if (!name) {
-      console.log("name can't be empty");
+      setShowAlert(true);
+      setAlertText("Name can't be empty");
       return;
     }
 
     if (!email) {
-      console.log("email can't be empty");
+      setShowAlert(true);
+      setAlertText("Email can't be empty");
       return;
     }
 
     if (!password1 || !password2) {
-      console.log("passwords can't be empty");
+      setShowAlert(true);
+      setAlertText("Passwords can't be empty");
       return;
     }
 
     if (password1 !== password2) {
-      console.log("passwords must match");
+      setShowAlert(true);
+      setAlertText("Passwords must match");
       return;
     }
 
@@ -60,13 +69,17 @@ const Register = () => {
         },
         body: JSON.stringify(body),
       });
+      const data = await res.json();
       if (res.ok) {
         history.push("/login");
       } else {
-        console.log("Failed to register");
+        setShowAlert(true);
+        setAlertText(`${data.message}`);
       }
-    } catch {
-      console.log("Failed to register");
+    } catch (e) {
+      console.warn(e);
+      setShowAlert(true);
+      setAlertText(`An unexpected error has occured`);
     }
   };
   return (
@@ -86,6 +99,14 @@ const Register = () => {
               <Form>
                 <Row className="justify-content-center" md={12}>
                   <h2 className="formHeader w-100 text-center my-4">Register</h2>
+                </Row>
+                <Row className="justify-content-center" md={12}>
+                  <CreateAlert
+                    text={alertText}
+                    type={alertType}
+                    show={showAlert}
+                    setShow={setShowAlert}
+                  />
                 </Row>
                 <Row className="justify-content-center" md={12}>
                   <Form.Group className="w-100 px-4" controlId="formBasicUsername">
