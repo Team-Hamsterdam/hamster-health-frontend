@@ -6,6 +6,7 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Tasks from "./components/Tasks";
 import Profile from "./components/Profile";
+import Leaderboard from "./components/Leaderboard";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 
@@ -38,6 +39,7 @@ function App() {
 
                 <PrivateRoute path="/tasks" component={Tasks} />
                 <PrivateRoute path="/profile" component={Profile} />
+                <PrivateRoute path="/leaderboard" component={Leaderboard} />
             </Router>
         </React.Fragment>
     );
