@@ -78,7 +78,7 @@ const CustomTasks = ({
                     backgroundColor: "#ff8600ff",
                   }}
                 >
-                  {customTask.title} - {customTask.desc}
+                  {customTask.title} - {customTask.description}
                 </Button>
               </Col>
             </Row>
