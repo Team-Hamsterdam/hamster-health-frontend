@@ -25,6 +25,7 @@ const CustomTasks = ({
                         <Form.Control
                             className="h2-size text-center"
                             type="text"
+                            maxLength="20"
                             placeholder="Enter Title"
                             onChange={(e) => setCustomTitle(e.target.value)}
                         />
@@ -37,6 +38,7 @@ const CustomTasks = ({
                     >
                         <Form.Control
                             type="text"
+                            maxLength="50"
                             placeholder="Enter Description"
                             onChange={(e) => setCustomDesc(e.target.value)}
                         />
@@ -63,12 +65,12 @@ const CustomTasks = ({
                 </Row>
             </Form>
             <>
-                <h4>Your Custom Tasks</h4>
+                <h4 className="mb-1">Your Custom Tasks</h4>
                 {customTasks.map((customTask, id) => (
                     <Row key={id} md={12}>
                         <Col className="rounded py-2 w-100" md={12}>
                             <Button
-                                className="w-100 mx-0 text-left"
+                                className="w-100 mx-0 text-left overflow-hidden"
                                 variant="dark"
                                 id="task-button2"
                                 onClick={() => {
