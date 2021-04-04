@@ -167,6 +167,15 @@ a:hover {
   font-size: 32px !important;
 }
 
+.progress-bar {
+  background-color: #ff8600ff !important;
+}
+
+.progress {
+  height: 50px !important;
+  font-size: 25px !important;
+}
+
 .task-alert {
   font-size: 14pt;
 }
