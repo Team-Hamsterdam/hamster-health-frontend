@@ -32,10 +32,7 @@ const CustomTasks = ({
                     </Form.Group>
                 </Row>
                 <Row md={12}>
-                    <Form.Group
-                        className="w-100 mt-2 mx-2"
-                        controlId="formBasicDesc"
-                    >
+                    <Form.Group className="w-100 mt-2 mx-2" controlId="formBasicDesc">
                         <Form.Control
                             type="text"
                             maxLength="50"
@@ -66,25 +63,26 @@ const CustomTasks = ({
             </Form>
             <>
                 <h4 className="mb-1">Your Custom Tasks</h4>
-                {customTasks.map((customTask, id) => (
-                    <Row key={id} md={12}>
-                        <Col className="rounded py-2 w-100" md={12}>
-                            <Button
-                                className="w-100 mx-0 text-left overflow-hidden"
-                                variant="dark"
-                                id="task-button2"
-                                onClick={() => {
-                                    addTask(customTask);
-                                }}
-                                style={{
-                                    backgroundColor: "#ff8600ff",
-                                }}
-                            >
-                                {customTask.title} - {customTask.desc}
-                            </Button>
-                        </Col>
-                    </Row>
-                ))}
+                {customTasks &&
+                    customTasks.map((customTask, id) => (
+                        <Row key={id} md={12}>
+                            <Col className="rounded py-2 w-100" md={12}>
+                                <Button
+                                    className="w-100 mx-0 text-left overflow-hidden"
+                                    variant="dark"
+                                    id="task-button2"
+                                    onClick={() => {
+                                        addTask(customTask);
+                                    }}
+                                    style={{
+                                        backgroundColor: "#ff8600ff",
+                                    }}
+                                >
+                                    {customTask.title} - {customTask.desc}
+                                </Button>
+                            </Col>
+                        </Row>
+                    ))}
             </>
         </>
     );

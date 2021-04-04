@@ -311,46 +311,34 @@ const Leaderboard = () => {
     return (
         <>
             <Navbar1 />
-            <Container
-                className="max-height pt-1"
-                style={{ backgroundColor: "#27187E" }}
-            >
+            <Container className="max-height pt-1" style={{ backgroundColor: "#27187E" }}>
                 <Row md={12}>
                     <Col md={12} style={{ backgroundColor: "#31278E" }}>
                         <h1 className="text-center">Leaderboard</h1>
                     </Col>
 
-                    <Col
-                        className="py-2"
-                        md={12}
-                        style={{ backgroundColor: "#4E52BE" }}
-                    >
+                    <Col className="py-2" md={12} style={{ backgroundColor: "#4E52BE" }}>
                         {sortMap(leaderboard)}
                         {leaderboard &&
-                            leaderboard
-                                .slice(0, max_leaderboard)
-                                .map((user, index) => (
-                                    <Row className="px-2" key={index} md={12}>
-                                        <Col
-                                            className="userEntry my-1 rounded"
-                                            style={{
-                                                backgroundColor: "#ff8600ff",
-                                                border: "solid #ff8600ff",
-                                            }}
-                                            md={12}
-                                        >
-                                            <b style={{ color: "white" }}>
-                                                {index + 1}. {user.username}
-                                            </b>
-                                            <b
-                                                className="float-right"
-                                                style={{ color: "white" }}
-                                            >
-                                                Level {user.level}
-                                            </b>
-                                        </Col>
-                                    </Row>
-                                ))}
+                            leaderboard.slice(0, max_leaderboard).map((user, index) => (
+                                <Row className="px-2" key={index} md={12}>
+                                    <Col
+                                        className="userEntry my-1 rounded"
+                                        style={{
+                                            backgroundColor: "#ff8600ff",
+                                            border: "solid #ff8600ff",
+                                        }}
+                                        md={12}
+                                    >
+                                        <b style={{ color: "white" }}>
+                                            {index + 1}. {user.username}
+                                        </b>
+                                        <b className="float-right" style={{ color: "white" }}>
+                                            Level {user.level}
+                                        </b>
+                                    </Col>
+                                </Row>
+                            ))}
                     </Col>
                 </Row>
             </Container>
