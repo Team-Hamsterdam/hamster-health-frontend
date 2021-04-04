@@ -7,7 +7,6 @@ import taskbackground from "../assets/images/taskbackground.png";
 import Navbar1 from "./Navbar1";
 
 const Leaderboard = () => {
-
     const api = "http://localhost:4000";
 
     const [leaderboard, setleaderboard] = useState([]);
@@ -26,7 +25,7 @@ const Leaderboard = () => {
                 });
 
                 const data = await res.json();
-                return data.leaderboard;
+                return data.users_list;
             } catch {
                 console.log("Error getting leaderboard");
                 console.log(leaderboard);
@@ -35,55 +34,55 @@ const Leaderboard = () => {
         const getLeaderboard = async () => {
             setleaderboard([
                 {
-                    username: 'Stevenson',
+                    username: "Stevenson",
                     level: 100,
                 },
                 {
-                    username: 'Matthewson',
+                    username: "Matthewson",
                     level: 5,
                 },
                 {
-                    username: 'Raymondson',
+                    username: "Raymondson",
                     level: 66,
                 },
                 {
-                    username: 'Michaelson',
+                    username: "Michaelson",
                     level: 7,
                 },
                 {
-                    username: 'Johnson',
+                    username: "Johnson",
                     level: 5,
                 },
                 {
-                    username: 'Appleson',
+                    username: "Appleson",
                     level: 69,
                 },
                 {
-                    username: 'Bananason',
+                    username: "Bananason",
                     level: 87,
                 },
                 {
-                    username: 'Orangeson',
+                    username: "Orangeson",
                     level: 2,
                 },
                 {
-                    username: 'Guitarson',
+                    username: "Guitarson",
                     level: 99,
                 },
                 {
-                    username: 'Violinson',
+                    username: "Violinson",
                     level: 15,
                 },
                 {
-                    username: 'Jackon',
+                    username: "Jackon",
                     level: 17,
                 },
                 {
-                    username: 'Jaxon',
+                    username: "Jaxon",
                     level: 16,
                 },
                 {
-                    username: 'Hamsterson',
+                    username: "Hamsterson",
                     level: 100,
                 },
             ]);
@@ -92,8 +91,8 @@ const Leaderboard = () => {
     }, []);
 
     const sortMap = (obj) => {
-        obj.sort((a, b) => (a.level < b.level) ? 1 : -1)
-    }
+        obj.sort((a, b) => (a.level < b.level ? 1 : -1));
+    };
 
     const max_leaderboard = 50;
 
@@ -109,27 +108,46 @@ const Leaderboard = () => {
                         <h1 className="text-center">Leaderboard</h1>
                     </Col>
 
-                    <Col className='py-2' md={12} style={{ backgroundColor: "#4E52BE"}}>
+                    <Col
+                        className="py-2"
+                        md={12}
+                        style={{ backgroundColor: "#4E52BE" }}
+                    >
                         {sortMap(leaderboard)}
-                        {leaderboard && 
-                            leaderboard.slice(0, max_leaderboard).map((user, index) => (
-                                <Row className='px-2' key={user.username} md={12}>
-                                    <Col className="userEntry my-1 rounded" style={{ backgroundColor: "#ff8600ff", border: 'solid #ff8600ff'}} md={12}>
-                                        <b style={{color: "white"}}>{index+1}. {user.username}</b>
-                                        <b className="float-right" style={{color: "white"}}>{user.level}</b>
-                                    </Col>
-                                </Row>
-                        ))}
+                        {leaderboard &&
+                            leaderboard
+                                .slice(0, max_leaderboard)
+                                .map((user, index) => (
+                                    <Row
+                                        className="px-2"
+                                        key={user.username}
+                                        md={12}
+                                    >
+                                        <Col
+                                            className="userEntry my-1 rounded"
+                                            style={{
+                                                backgroundColor: "#ff8600ff",
+                                                border: "solid #ff8600ff",
+                                            }}
+                                            md={12}
+                                        >
+                                            <b style={{ color: "white" }}>
+                                                {index + 1}. {user.username}
+                                            </b>
+                                            <b
+                                                className="float-right"
+                                                style={{ color: "white" }}
+                                            >
+                                                {user.level}
+                                            </b>
+                                        </Col>
+                                    </Row>
+                                ))}
                     </Col>
-                    
-
-
                 </Row>
             </Container>
-        
-        
         </>
-    )
-}
+    );
+};
 
-export default Leaderboard
+export default Leaderboard;
