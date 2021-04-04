@@ -8,46 +8,46 @@ import { Redirect, Route } from "react-router-dom";
 import { api } from "./Api";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-    const isLoggedIn = async () => {
-        const token = localStorage.getItem("token");
-        try {
-            const res = await fetch(`${api}/auth/check`, {
-                method: "GET",
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                    Authorization: token,
-                },
-            });
-            const data = await res.json();
-            return data.token;
-        } catch {
-            console.log("Failed checking");
-        }
+  const isLoggedIn = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      const res = await fetch(`${api}/auth/check`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      });
+      const data = await res.json();
+      return data.token;
+    } catch {
+      console.log("Failed checking");
+    }
 
-        if (token != null) {
-            return true;
-        }
-        return false;
-    };
+    if (token != null) {
+      return true;
+    }
+    return false;
+  };
 
-    return (
-        <Route
-            {...rest}
-            render={(props) =>
-                isLoggedIn ? (
-                    <Component {...props} />
-                ) : (
-                    <Redirect
-                        to={{
-                            pathname: "/login",
-                            state: { from: props.location },
-                        }}
-                    />
-                )
-            }
-        />
-    );
+  return (
+    <Route
+      {...rest}
+      render={(props) =>
+        isLoggedIn ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/login",
+              state: { from: props.location },
+            }}
+          />
+        )
+      }
+    />
+  );
 };
 
 export default PrivateRoute;
