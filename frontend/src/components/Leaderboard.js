@@ -5,12 +5,10 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import taskbackground from "../assets/images/taskbackground.png";
 import Navbar1 from "./Navbar1";
+import { api } from "./Api";
 
 const Leaderboard = () => {
-    const api = "http://localhost:4000";
-
     const [leaderboard, setleaderboard] = useState([]);
-    const [leaderboardPreview, setLeaderboardPreview] = useState(0);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -32,61 +30,275 @@ const Leaderboard = () => {
             }
         };
         const getLeaderboard = async () => {
-            setleaderboard([
-                {
-                    username: "Stevenson",
-                    level: 100,
-                },
-                {
-                    username: "Matthewson",
-                    level: 5,
-                },
-                {
-                    username: "Raymondson",
-                    level: 66,
-                },
-                {
-                    username: "Michaelson",
-                    level: 7,
-                },
-                {
-                    username: "Johnson",
-                    level: 5,
-                },
-                {
-                    username: "Appleson",
-                    level: 69,
-                },
-                {
-                    username: "Bananason",
-                    level: 87,
-                },
-                {
-                    username: "Orangeson",
-                    level: 2,
-                },
-                {
-                    username: "Guitarson",
-                    level: 99,
-                },
-                {
-                    username: "Violinson",
-                    level: 15,
-                },
-                {
-                    username: "Jackon",
-                    level: 17,
-                },
-                {
-                    username: "Jaxon",
-                    level: 16,
-                },
-                {
-                    username: "Hamsterson",
-                    level: 100,
-                },
-            ]);
+            const leaderboardFromServer = await fetchLeaderboard();
+            if (leaderboardFromServer) {
+                setleaderboard(leaderboardFromServer.users_list);
+            } else {
+                setleaderboard([
+                    {
+                        username: "Stevenson",
+                        level: 100,
+                    },
+                    {
+                        username: "Matthewson",
+                        level: 5,
+                    },
+                    {
+                        username: "Raymondson",
+                        level: 66,
+                    },
+                    {
+                        username: "Michaelson",
+                        level: 7,
+                    },
+                    {
+                        username: "Johnson",
+                        level: 5,
+                    },
+                    {
+                        username: "Appleson",
+                        level: 69,
+                    },
+                    {
+                        username: "Bananason",
+                        level: 87,
+                    },
+                    {
+                        username: "Orangeson",
+                        level: 2,
+                    },
+                    {
+                        username: "Guitarson",
+                        level: 99,
+                    },
+                    {
+                        username: "Violinson",
+                        level: 15,
+                    },
+                    {
+                        username: "Jackson",
+                        level: 17,
+                    },
+                    {
+                        username: "Jaxon",
+                        level: 16,
+                    },
+                    {
+                        username: "Hamsterson",
+                        level: 100,
+                    },
+                    {
+                        username: "Stevenson",
+                        level: 100,
+                    },
+                    {
+                        username: "Matthewson",
+                        level: 5,
+                    },
+                    {
+                        username: "Raymondson",
+                        level: 66,
+                    },
+                    {
+                        username: "Michaelson",
+                        level: 7,
+                    },
+                    {
+                        username: "Johnson",
+                        level: 5,
+                    },
+                    {
+                        username: "Appleson",
+                        level: 69,
+                    },
+                    {
+                        username: "Bananason",
+                        level: 87,
+                    },
+                    {
+                        username: "Orangeson",
+                        level: 2,
+                    },
+                    {
+                        username: "Guitarson",
+                        level: 99,
+                    },
+                    {
+                        username: "Violinson",
+                        level: 15,
+                    },
+                    {
+                        username: "Jackson",
+                        level: 17,
+                    },
+                    {
+                        username: "Jaxon",
+                        level: 16,
+                    },
+                    {
+                        username: "Hamsterson",
+                        level: 100,
+                    },
+                    {
+                        username: "Stevenson",
+                        level: 100,
+                    },
+                    {
+                        username: "Matthewson",
+                        level: 5,
+                    },
+                    {
+                        username: "Raymondson",
+                        level: 66,
+                    },
+                    {
+                        username: "Michaelson",
+                        level: 7,
+                    },
+                    {
+                        username: "Johnson",
+                        level: 5,
+                    },
+                    {
+                        username: "Appleson",
+                        level: 69,
+                    },
+                    {
+                        username: "Bananason",
+                        level: 87,
+                    },
+                    {
+                        username: "Orangeson",
+                        level: 2,
+                    },
+                    {
+                        username: "Guitarson",
+                        level: 99,
+                    },
+                    {
+                        username: "Violinson",
+                        level: 15,
+                    },
+                    {
+                        username: "Jackson",
+                        level: 17,
+                    },
+                    {
+                        username: "Jaxon",
+                        level: 16,
+                    },
+                    {
+                        username: "Hamsterson",
+                        level: 100,
+                    },
+                    {
+                        username: "Stevenson",
+                        level: 100,
+                    },
+                    {
+                        username: "Matthewson",
+                        level: 5,
+                    },
+                    {
+                        username: "Raymondson",
+                        level: 66,
+                    },
+                    {
+                        username: "Michaelson",
+                        level: 7,
+                    },
+                    {
+                        username: "Johnson",
+                        level: 5,
+                    },
+                    {
+                        username: "Appleson",
+                        level: 69,
+                    },
+                    {
+                        username: "Bananason",
+                        level: 87,
+                    },
+                    {
+                        username: "Orangeson",
+                        level: 2,
+                    },
+                    {
+                        username: "Guitarson",
+                        level: 99,
+                    },
+                    {
+                        username: "Violinson",
+                        level: 15,
+                    },
+                    {
+                        username: "Jackson",
+                        level: 17,
+                    },
+                    {
+                        username: "Jaxon",
+                        level: 16,
+                    },
+                    {
+                        username: "Hamsterson",
+                        level: 100,
+                    },
+                    {
+                        username: "Stevenson",
+                        level: 100,
+                    },
+                    {
+                        username: "Matthewson",
+                        level: 5,
+                    },
+                    {
+                        username: "Raymondson",
+                        level: 66,
+                    },
+                    {
+                        username: "Michaelson",
+                        level: 7,
+                    },
+                    {
+                        username: "Johnson",
+                        level: 5,
+                    },
+                    {
+                        username: "Appleson",
+                        level: 69,
+                    },
+                    {
+                        username: "Bananason",
+                        level: 87,
+                    },
+                    {
+                        username: "Orangeson",
+                        level: 2,
+                    },
+                    {
+                        username: "Guitarson",
+                        level: 99,
+                    },
+                    {
+                        username: "Violinson",
+                        level: 15,
+                    },
+                    {
+                        username: "Jackson",
+                        level: 17,
+                    },
+                    {
+                        username: "Jaxon",
+                        level: 16,
+                    },
+                    {
+                        username: "Hamsterson",
+                        level: 100,
+                    },
+                ]);
+            }
         };
+
         getLeaderboard();
     }, []);
 
@@ -118,11 +330,7 @@ const Leaderboard = () => {
                             leaderboard
                                 .slice(0, max_leaderboard)
                                 .map((user, index) => (
-                                    <Row
-                                        className="px-2"
-                                        key={user.username}
-                                        md={12}
-                                    >
+                                    <Row className="px-2" key={index} md={12}>
                                         <Col
                                             className="userEntry my-1 rounded"
                                             style={{
@@ -138,7 +346,7 @@ const Leaderboard = () => {
                                                 className="float-right"
                                                 style={{ color: "white" }}
                                             >
-                                                {user.level}
+                                                Level {user.level}
                                             </b>
                                         </Col>
                                     </Row>
