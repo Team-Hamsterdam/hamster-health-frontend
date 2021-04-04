@@ -118,7 +118,13 @@ const Login = () => {
               <Form>
                 <Row className="justify-content-center" md={12}>
                   <h2 className="formHeader w-100 text-center my-4">Log In</h2>
-                  <CreateAlert text={alertText} type={alertType} show={showAlert} classes="mx-4" />
+                  <CreateAlert
+                    text={alertText}
+                    type={alertType}
+                    show={showAlert}
+                    setShow={setShowAlert}
+                    classes="mx-4"
+                  />
                 </Row>
                 <Row className="justify-content-center" md={12}>
                   <Form.Group className="w-100 px-4" controlId="formBasicUsername">

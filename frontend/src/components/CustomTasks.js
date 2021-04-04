@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import CreateAlert from "./CreateAlert";
 import Form from "react-bootstrap/Form";
 const CustomTasks = ({
   customTasks,
@@ -10,6 +11,9 @@ const CustomTasks = ({
   handleAddCustomTask,
   addTask,
 }) => {
+  const [alertText, setAlertText] = useState("");
+  const [alertType, setAlertType] = useState("danger");
+  const [showAlert, setShowAlert] = useState(false);
   return (
     <>
       <Form>
@@ -62,6 +66,7 @@ const CustomTasks = ({
         </Row>
       </Form>
       <>
+        <CreateAlert text={alertText} type={alertType} show={showAlert} setShow={setShowAlert} />
         <h4 className="mb-1">Your Custom Tasks</h4>
         {customTasks &&
           customTasks.map((customTask, id) => (

@@ -1,9 +1,15 @@
 import React from "react";
 import Alert from "react-bootstrap/Alert";
 
-const CreateAlert = ({ type, text, show, classes }) => {
+const CreateAlert = ({ type, text, show, classes, setShow }) => {
   return (
-    <Alert className={classes} show={show} variant={type}>
+    <Alert
+      onClose={() => setShow(false)}
+      dismissible
+      className={classes}
+      show={show}
+      variant={type}
+    >
       {text}
     </Alert>
   );

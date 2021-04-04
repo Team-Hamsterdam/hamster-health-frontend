@@ -100,7 +100,12 @@ const Register = () => {
                   <h2 className="formHeader w-100 text-center my-4">Register</h2>
                 </Row>
                 <Row className="justify-content-center" md={12}>
-                  <CreateAlert text={alertText} type={alertType} show={showAlert} />
+                  <CreateAlert
+                    text={alertText}
+                    type={alertType}
+                    show={showAlert}
+                    setShow={setShowAlert}
+                  />
                 </Row>
                 <Row className="justify-content-center" md={12}>
                   <Form.Group className="w-100 px-4" controlId="formBasicUsername">
