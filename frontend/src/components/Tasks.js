@@ -577,9 +577,7 @@ const Tasks = () => {
                               <h2 className="px-2 w-100 text-center">{task.title}</h2>
                             </Row>
                             <Row md={12}>
-                              <p className="px-2 py-2">
-                                {task.description} actual id is {key}
-                              </p>
+                              <p className="px-2 py-2">{task.description}</p>
                             </Row>
                             <Row md={12}>
                               <Col md={6} className="px-2">
