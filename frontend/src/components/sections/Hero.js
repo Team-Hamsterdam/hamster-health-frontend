@@ -64,10 +64,10 @@ const Hero = ({
               <p className="m-0 mb-32 reveal-from-bottom" data-reveal-delay="400">
                 An organisational task tracking tool designed to help you achieve your goals
               </p>
-              <div className="reveal-from-bottom" data-reveal-delay="600">
+              <div className="reveal-from-bottom mt-4" data-reveal-delay="600">
                 <ButtonGroup>
                   <Link to="/register">
-                    <Button color="primary" wideMobile className="mt-4 mb-0">
+                    <Button color="primary" wideMobile className="mb-0">
                       Get started
                     </Button>
                   </Link>

@@ -64,7 +64,7 @@ const FeaturesTiles = ({
                   </div>
                 </div>
                 <div className="features-tiles-item-content">
-                  <h4 className="mt-0 mb-8">Tasks</h4>
+                  <h4 className="mt-0 mb-8">Stay on Task</h4>
                   <p className="m-0 text-sm">
                     Hamster Health helps you create a daily list of goals for you to achieve. It
                     allows you to create any task you want so you can choose to hit the books or hit
@@ -79,7 +79,7 @@ const FeaturesTiles = ({
                 <div className="features-tiles-item-header">
                   <div className="features-tiles-item-image mb-16">
                     <Image
-                      src={require("./../../assets/images/feature-tile-icon-02.svg")}
+                      src={require("./../../assets/images/feature-tile-icon-03.svg")}
                       alt="Features tile icon 02"
                       width={64}
                       height={64}
@@ -87,11 +87,10 @@ const FeaturesTiles = ({
                   </div>
                 </div>
                 <div className="features-tiles-item-content">
-                  <h4 className="mt-0 mb-8">Progress Tracker </h4>
+                  <h4 className="mt-0 mb-8">Keep up a streak</h4>
                   <p className="m-0 text-sm">
-                    Hamster Health holds on to your task progress over the last fortnight. You can
-                    check how many of your tasks you completed for a certain day to see if you're
-                    getting closer to your goals or if you still need to improve a bit.
+                    As you complete tasks you gain experience to level up your profile. The more
+                    tasks you complete the higher your level.
                   </p>
                 </div>
               </div>
@@ -102,7 +101,7 @@ const FeaturesTiles = ({
                 <div className="features-tiles-item-header">
                   <div className="features-tiles-item-image mb-16">
                     <Image
-                      src={require("./../../assets/images/feature-tile-icon-03.svg")}
+                      src={require("./../../assets/images/feature-tile-icon-02.svg")}
                       alt="Features tile icon 03"
                       width={64}
                       height={64}
@@ -110,11 +109,10 @@ const FeaturesTiles = ({
                   </div>
                 </div>
                 <div className="features-tiles-item-content">
-                  <h4 className="mt-0 mb-8">Keep up a streak</h4>
+                  <h4 className="mt-0 mb-8">Get Competitive</h4>
                   <p className="m-0 text-sm">
-                    As you complete tasks you gain experience to level up your profile. The more
-                    tasks you complete the higher your level. Hamster Health even includes a
-                    leaderboard of the users with the 50 highest levels!
+                    Hamster Health features a leaderboard ranking the 50 highest level players. Do
+                    your best to improve and you might see yourself there.
                   </p>
                 </div>
               </div>
