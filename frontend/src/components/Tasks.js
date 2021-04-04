@@ -18,7 +18,6 @@ const Tasks = () => {
     const [tasksLength, setTasksLength] = useState(0);
     const [ourTasksBtn, setOurTasksBtn] = useState(false);
     const [customTasksBtn, setCustomTasksBtn] = useState(false);
-    const [createTaskBtn, setCreateTaskBtn] = useState(false);
     const [customTitle, setCustomTitle] = useState("");
     const [customDesc, setCustomDesc] = useState("");
 
@@ -190,18 +189,10 @@ const Tasks = () => {
     const handleOurTasksBtn = () => {
         setOurTasksBtn(true);
         setCustomTasksBtn(false);
-        setCreateTaskBtn(false);
     };
 
     const handleCustomTasksBtn = () => {
         setCustomTasksBtn(true);
-        setOurTasksBtn(false);
-        setCreateTaskBtn(false);
-    };
-
-    const handleCreateBtn = () => {
-        setCreateTaskBtn(true);
-        setCustomTasksBtn(false);
         setOurTasksBtn(false);
     };
 
@@ -209,11 +200,12 @@ const Tasks = () => {
         setTaskPreview(id);
         setOurTasksBtn(false);
         setCustomTasksBtn(false);
-        setCreateTaskBtn(false);
     };
 
     const addTask = (task) => {
         console.log(tasks.length);
+        setCustomTitle("");
+        setCustomDesc("");
         if (tasks.length < max_tasks) {
             const newTask = {
                 id: tasks.length,
@@ -230,7 +222,6 @@ const Tasks = () => {
     };
 
     const handleAddCustomTask = () => {
-        console.log("added new task");
         if (customTitle.length > 0) {
             const newTask = {
                 id: tasks.length,
@@ -239,8 +230,19 @@ const Tasks = () => {
                 xp: "20",
                 is_custom: false,
             };
-            setCustomTasks([...customTasks, newTask]);
-            console.log("added new task", newTask);
+
+            const includes = customTasks.some((task) => {
+                return (
+                    task.title === newTask.title && task.desc === newTask.desc
+                );
+            });
+
+            if (!includes) {
+                setCustomTasks([...customTasks, newTask]);
+                console.log("added new task", newTask);
+            } else {
+                console.log("task already exists");
+            }
         }
     };
 
@@ -346,78 +348,17 @@ const Tasks = () => {
                             }}
                         >
                             <Col>
-                                {(createTaskBtn && (
-                                    <Form>
-                                        <Row
-                                            md={12}
-                                            id="task-title"
-                                            className="justify-content-center h2-size"
-                                            style={{
-                                                backgroundColor: "#31278E",
-                                            }}
-                                        >
-                                            <Form.Group controlId="formBasicTitle">
-                                                <Form.Control
-                                                    className="h2-size text-center"
-                                                    type="text"
-                                                    placeholder="Enter Title"
-                                                    onChange={(e) =>
-                                                        setCustomTitle(
-                                                            e.target.value
-                                                        )
-                                                    }
-                                                />
-                                            </Form.Group>
-                                        </Row>
-                                        <Row md={12}>
-                                            <Form.Group
-                                                className="w-100 mt-2 mx-2"
-                                                controlId="formBasicDesc"
-                                            >
-                                                <Form.Control
-                                                    type="text"
-                                                    placeholder="Enter Description"
-                                                    onChange={(e) =>
-                                                        setCustomDesc(
-                                                            e.target.value
-                                                        )
-                                                    }
-                                                />
-                                            </Form.Group>
-                                        </Row>
-                                        <Row md={12}>
-                                            <Col md={12} className="px-2">
-                                                <Button
-                                                    className="w-100 mx-0"
-                                                    variant="dark"
-                                                    id="task-button2"
-                                                    type="submit"
-                                                    onClick={(e) => {
-                                                        e.preventDefault();
-                                                        handleAddCustomTask();
-                                                    }}
-                                                    style={{
-                                                        backgroundColor:
-                                                            "#31278E",
-                                                    }}
-                                                >
-                                                    Add Task
-                                                </Button>
-                                            </Col>
-                                        </Row>
-                                    </Form>
+                                {(customTasksBtn && (
+                                    <CustomTasks
+                                        customTasks={customTasks}
+                                        setCustomTitle={setCustomTitle}
+                                        setCustomDesc={setCustomDesc}
+                                        handleAddCustomTask={
+                                            handleAddCustomTask
+                                        }
+                                        addTask={addTask}
+                                    />
                                 )) ||
-                                    (customTasksBtn && (
-                                        <CustomTasks
-                                            customTasks={customTasks}
-                                            setCustomTitle={setCustomTitle}
-                                            setCustomDesc={setCustomDesc}
-                                            handleAddCustomTask={
-                                                handleAddCustomTask
-                                            }
-                                            addTask={addTask}
-                                        />
-                                    )) ||
                                     (ourTasksBtn &&
                                         ourTasks.map((ourTask, id) => (
                                             <Row key={id} md={12}>

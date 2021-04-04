@@ -1,7 +1,5 @@
 import React from "react";
-
 import Row from "react-bootstrap/Row";
-import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -65,11 +63,12 @@ const CustomTasks = ({
                 </Row>
             </Form>
             <>
+                <h4>Your Custom Tasks</h4>
                 {customTasks.map((customTask, id) => (
                     <Row key={id} md={12}>
-                        <Col className="rounded py-2 w-100 text-center" md={12}>
+                        <Col className="rounded py-2 w-100" md={12}>
                             <Button
-                                className="w-100 mx-0"
+                                className="w-100 mx-0 text-left"
                                 variant="dark"
                                 id="task-button2"
                                 onClick={() => {
@@ -79,7 +78,7 @@ const CustomTasks = ({
                                     backgroundColor: "#ff8600ff",
                                 }}
                             >
-                                {customTask.title}
+                                {customTask.title} - {customTask.desc}
                             </Button>
                         </Col>
                     </Row>
