@@ -23,6 +23,7 @@ const Login = () => {
   const postLoginInfo = async () => {
     if (!username) {
       setShowAlert(true);
+      setAlertType("danger");
       setAlertText("Username can't be empty");
       return;
     }

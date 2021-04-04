@@ -26,6 +26,7 @@ const Register = () => {
   const postRegisterInfo = async () => {
     if (!username) {
       setShowAlert(true);
+      setAlertType("danger");
       setAlertText("Username can't be empty");
       return;
     }

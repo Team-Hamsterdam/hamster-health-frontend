@@ -4,7 +4,6 @@ import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
 import Navbar1 from "./Navbar1";
 import CustomTasks from "./CustomTasks";
 import { api } from "./Api";
@@ -553,55 +552,55 @@ const Tasks = () => {
                     ))) ||
                   (tasks &&
                     tasks.map((task, key) => {
-                      if (key === taskPreview) {
-                        return (
-                          <React.Fragment key={key}>
-                            <Row
-                              md={12}
-                              id="task-title"
-                              style={{
-                                backgroundColor: "#31278E",
-                              }}
-                            >
-                              <h2 className="px-2 w-100 text-center">{task.title}</h2>
-                            </Row>
-                            <Row md={12}>
-                              <p className="px-2 py-2">{task.description}</p>
-                            </Row>
-                            <Row md={12}>
-                              <Col md={6} className="px-2">
-                                <Button
-                                  className="w-100 mx-0"
-                                  variant="dark"
-                                  id="task-button2"
-                                  style={{
-                                    backgroundColor: "#31278E",
-                                  }}
-                                  onClick={() => {
-                                    handleFinishTask(task);
-                                  }}
-                                >
-                                  Mark as finished (+
-                                  {task.task_xp}XP)
-                                </Button>
-                              </Col>
-                              <Col md={6} className="px-2">
-                                <Button
-                                  variant="dark"
-                                  id="task-button2"
-                                  className="w-100 mx-0"
-                                  onClick={() => removeTask(task)}
-                                  style={{
-                                    backgroundColor: "#31278E",
-                                  }}
-                                >
-                                  Remove Task
-                                </Button>
-                              </Col>
-                            </Row>
-                          </React.Fragment>
-                        );
-                      }
+                      return key === taskPreview ? (
+                        <React.Fragment key={key}>
+                          <Row
+                            md={12}
+                            id="task-title"
+                            style={{
+                              backgroundColor: "#31278E",
+                            }}
+                          >
+                            <h2 className="px-2 w-100 text-center">{task.title}</h2>
+                          </Row>
+                          <Row md={12}>
+                            <p className="px-2 py-2">{task.description}</p>
+                          </Row>
+                          <Row md={12}>
+                            <Col md={6} className="px-2">
+                              <Button
+                                className="w-100 mx-0"
+                                variant="dark"
+                                id="task-button2"
+                                style={{
+                                  backgroundColor: "#31278E",
+                                }}
+                                onClick={() => {
+                                  handleFinishTask(task);
+                                }}
+                              >
+                                Mark as finished (+
+                                {task.task_xp}XP)
+                              </Button>
+                            </Col>
+                            <Col md={6} className="px-2">
+                              <Button
+                                variant="dark"
+                                id="task-button2"
+                                className="w-100 mx-0"
+                                onClick={() => removeTask(task)}
+                                style={{
+                                  backgroundColor: "#31278E",
+                                }}
+                              >
+                                Remove Task
+                              </Button>
+                            </Col>
+                          </Row>
+                        </React.Fragment>
+                      ) : (
+                        ""
+                      );
                     }))}
               </Col>
             </Row>
