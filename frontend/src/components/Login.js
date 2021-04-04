@@ -7,6 +7,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Header from "./layout/Header";
+import CreateAlert from "./CreateAlert";
 import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
 import { api } from "./Api";
@@ -14,15 +15,20 @@ import { api } from "./Api";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [alertText, setAlertText] = useState("");
+  const [alertType, setAlertType] = useState("danger");
+  const [showAlert, setShowAlert] = useState(false);
   const history = useHistory();
 
   const postLoginInfo = async () => {
     if (!username) {
-      console.log("username can't be empty");
+      setShowAlert(true);
+      setAlertText("Error: Username can't be empty");
       return;
     }
     if (!password) {
-      console.log("password can't be empty");
+      setShowAlert(true);
+      setAlertText("Error: Password can't be empty");
       return;
     }
 
@@ -44,10 +50,13 @@ const Login = () => {
       if (res.ok) {
         localStorage.setItem("token", data.token);
         history.push("/tasks");
-        console.log("YES");
+      } else {
+        setShowAlert(true);
+        setAlertText(`Error: ${data.message}`);
       }
     } catch {
-      console.log("Failed logging in");
+      setShowAlert(true);
+      setAlertText("Invalid Credentials: Please check your username/password and try again.");
     }
   };
   return (
@@ -109,6 +118,7 @@ const Login = () => {
               <Form>
                 <Row className="justify-content-center" md={12}>
                   <h2 className="formHeader w-100 text-center my-4">Log In</h2>
+                  <CreateAlert text={alertText} type={alertType} show={showAlert} classes="mx-4" />
                 </Row>
                 <Row className="justify-content-center" md={12}>
                   <Form.Group className="w-100 px-4" controlId="formBasicUsername">
