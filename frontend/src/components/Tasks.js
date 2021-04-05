@@ -220,6 +220,15 @@ const Tasks = () => {
 
   const removeTask = async (task) => {
     const token = localStorage.getItem("token");
+    const newTasks = tasks;
+    const index = tasks.map((e) => e.task_id).indexOf(task.task_id);
+
+    newTasks.splice(index, 1);
+    setTasks(newTasks);
+    if (index === 0) {
+      handleTaskClick(-1);
+    }
+    handleTaskClick(index - 1);
 
     try {
       const body = {
@@ -236,17 +245,7 @@ const Tasks = () => {
       });
       const data = await res.json();
 
-      if (res.ok) {
-        const newTasks = tasks;
-        const index = tasks.map((e) => e.task_id).indexOf(task.task_id);
-
-        newTasks.splice(index, 1);
-        setTasks(newTasks);
-        if (index === 0) {
-          handleTaskClick(-1);
-        }
-        handleTaskClick(index - 1);
-      } else {
+      if (!res.ok) {
         setShowAlert(true);
         setAlertType("danger");
         setAlertText(`${data.message}`);
@@ -279,6 +278,14 @@ const Tasks = () => {
     setCustomTitle("");
     setCustomDesc("");
     if (tasks.length < max_tasks) {
+      const newTask = {
+        task_id: task.task_id,
+        title: task.title,
+        description: task.description,
+        task_xp: task.task_xp,
+        is_custom: false,
+      };
+      setTasks([...tasks, newTask]);
       try {
         const body = {
           task_id: task.task_id,
@@ -294,16 +301,7 @@ const Tasks = () => {
         });
 
         const data = await res.json();
-        if (res.ok) {
-          const newTask = {
-            task_id: task.task_id,
-            title: task.title,
-            description: task.description,
-            task_xp: task.task_xp,
-            is_custom: false,
-          };
-          setTasks([...tasks, newTask]);
-        } else {
+        if (!res.ok) {
           setShowAlert(true);
           setAlertType("danger");
           setAlertText(`${data.message}`);
@@ -345,7 +343,11 @@ const Tasks = () => {
         });
         const data = await res.json();
 
-        if (res.ok) {
+        if (!res.ok) {
+          setShowAlert(true);
+          setAlertType("danger");
+          setAlertText(`${data.message}`);
+        } else {
           const newTask = {
             task_id: data.task_id,
             title: customTitle,
@@ -364,10 +366,6 @@ const Tasks = () => {
             setShowAlert(true);
             setAlertText(`You already have this task!`);
           }
-        } else {
-          setShowAlert(true);
-          setAlertType("danger");
-          setAlertText(`${data.message}`);
         }
       } catch (e) {
         console.warn(e);
@@ -387,6 +385,11 @@ const Tasks = () => {
       const body = {
         task_id: task.task_id,
       };
+      removeTask(task);
+      setShowAlert(true);
+      setAlertType("success");
+      setAlertText(`You just gained +${task.task_xp}XP`);
+
       const res = await fetch(`${api}/task/finish`, {
         method: "PUT",
         headers: {
@@ -396,12 +399,7 @@ const Tasks = () => {
         body: JSON.stringify(body),
       });
       const data = await res.json();
-      if (res.ok) {
-        removeTask(task);
-        setShowAlert(true);
-        setAlertType("success");
-        setAlertText(`You just gained +${task.task_xp}XP`);
-      } else {
+      if (!res.ok) {
         setShowAlert(true);
         setAlertType("danger");
         setAlertText(`${data.message}`);
