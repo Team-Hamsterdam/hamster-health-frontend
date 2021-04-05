@@ -1,3 +1,4 @@
+# Hamster Health Front end
 ## Inspiration
 - Our team decided to address the issue of staying organised and motivated in quarantine through our web app Hamster Health. Hamster Health is an organisation tool which allows the user to create a to-do list with custom tasks which they can complete. Upon completing their tasks they will be rewarded with experience points to increase their account level. This will help motivate the user by giving them a sense of progression as they see their level increase whilst they become more organised, furthermore, Hamster Health implements a leader board which displays the 50 users with the highest levels, creating a social aspect of motivation which is lost in quarantine life.
 
