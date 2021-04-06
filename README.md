@@ -2,6 +2,11 @@
 ## Our Website
 https://hamsterdam.tech/
 
+## About
+- Hamster Health was built for the [Hackiethon 2021 hackathon](https://hackiethon.hackmelb.org/) hosted by HackMelbourne
+- Our team (Hamsterdam) were finalists for the hackathon!
+![Finalists](https://raw.githubusercontent.com/Team-Hamsterdam/hackiethon-frontend/main/hackiethon_finalists.png)
+
 ## Libraries/Frameworks/Languages
 - Javascript, Sass, HTML, CSS, React.js, Bootstrap/React-Bootstrap
 
