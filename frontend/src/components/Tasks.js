@@ -218,8 +218,7 @@ const Tasks = () => {
     getTasks();
   }, []);
 
-  const removeTask = async (task) => {
-    const token = localStorage.getItem("token");
+  const clientSideRemoveTask = (task) => {
     const newTasks = tasks;
     const index = tasks.map((e) => e.task_id).indexOf(task.task_id);
 
@@ -229,6 +228,10 @@ const Tasks = () => {
       handleTaskClick(-1);
     }
     handleTaskClick(index - 1);
+  };
+
+  const removeTask = async (task) => {
+    const token = localStorage.getItem("token");
 
     try {
       const body = {
@@ -385,7 +388,7 @@ const Tasks = () => {
       const body = {
         task_id: task.task_id,
       };
-      removeTask(task);
+      clientSideRemoveTask(task);
       setShowAlert(true);
       setAlertType("success");
       setAlertText(`You just gained +${task.task_xp}XP`);
@@ -403,6 +406,8 @@ const Tasks = () => {
         setShowAlert(true);
         setAlertType("danger");
         setAlertText(`${data.message}`);
+      } else {
+        removeTask(task);
       }
     } catch (e) {
       console.warn(e);
@@ -586,7 +591,10 @@ const Tasks = () => {
                                 variant="dark"
                                 id="task-button2"
                                 className="w-100 mx-0"
-                                onClick={() => removeTask(task)}
+                                onClick={() => {
+                                  clientSideRemoveTask(task);
+                                  removeTask(task);
+                                }}
                                 style={{
                                   backgroundColor: "#31278E",
                                 }}
