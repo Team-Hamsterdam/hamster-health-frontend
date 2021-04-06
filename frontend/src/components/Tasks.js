@@ -279,17 +279,10 @@ const Tasks = () => {
 
   const addTask = async (task) => {
     const token = localStorage.getItem("token");
+    console.log("Trying to add active task", task);
     setCustomTitle("");
     setCustomDesc("");
     if (tasks.length < max_tasks) {
-      const newTask = {
-        task_id: task.task_id,
-        title: task.title,
-        description: task.description,
-        task_xp: task.task_xp,
-        is_custom: false,
-      };
-      setTasks([...tasks, newTask]);
       try {
         const body = {
           task_id: task.task_id,
@@ -309,6 +302,15 @@ const Tasks = () => {
           setShowAlert(true);
           setAlertType("danger");
           setAlertText(`${data.message}`);
+        } else {
+          const newTask = {
+            task_id: task.task_id,
+            title: task.title,
+            description: task.description,
+            task_xp: task.task_xp,
+            is_custom: false,
+          };
+          setTasks([...tasks, newTask]);
         }
       } catch (e) {
         console.warn(e);
