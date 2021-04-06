@@ -36,7 +36,7 @@ const Profile = () => {
         setXp(infoFromServer.user.xp);
         setLevel(infoFromServer.user.level);
       } else {
-        setUsername("Samsungson");
+        setUsername("Hamsterdam");
         setXp(15);
         setLevel(69);
       }
@@ -44,7 +44,8 @@ const Profile = () => {
     getUsers();
   }, []);
 
-  const progressPercentage = (xp / 50) * 100;
+  const xp_threshold = 20;
+  const progressPercentage = (xp / xp_threshold) * 100;
 
   return (
     <>
@@ -60,7 +61,7 @@ const Profile = () => {
 
           <Col md={12}>
             <h2 className="text-center">
-              Experience: {xp}/50 ({progressPercentage}%)
+              Experience: {xp}/{xp_threshold} ({progressPercentage}%)
             </h2>
           </Col>
 
