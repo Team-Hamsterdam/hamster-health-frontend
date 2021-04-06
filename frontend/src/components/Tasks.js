@@ -228,6 +228,7 @@ const Tasks = () => {
       handleTaskClick(-1);
     }
     handleTaskClick(index - 1);
+    console.log("Just removed task", task);
   };
 
   const removeTask = async (task) => {
