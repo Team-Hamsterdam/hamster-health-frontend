@@ -27,8 +27,7 @@ https://hamsterdam.tech/
 - Deploying our app took a really long time since it was our first time doing it
 
 ## Accomplishments that we're proud of
-- We all made our first full stack application
-- The app actually works
+- The app actually works and is on the internet
 - We managed to get the front end and back end working together after deployment
 - Our app is actually on the internet
 
