@@ -1,12 +1,5 @@
 # Hamster Health Frontend 
-## Our Website
-https://hamsterdam.tech/
-
-## Demo Video
-[![Hamster Wealth Demo](https://img.youtube.com/vi/tPwBvI1yCMg/0.jpg)](https://www.youtube.com/watch?v=tPwBvI1yCMg)
-
 ## About
-- This React app is hosted on Netlify
 - Hamster Health was built for the [Hackiethon 2021 hackathon](https://hackiethon.hackmelb.org/) hosted by HackMelbourne
 - We were finalists ranked within the top 16 for the hackathon!
 ![Finalists](https://raw.githubusercontent.com/Team-Hamsterdam/hackiethon-frontend/main/hackiethon_finalists.png)
